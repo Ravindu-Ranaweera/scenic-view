@@ -1,0 +1,40 @@
+/* Each word sits in a clipping line; the words rise out of it in
+   sequence. The markup stays one readable string for screen
+   readers via aria-label on the heading. */
+.heading {
+  margin: 0;
+}
+
+.line {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+
+.word {
+  display: inline-block;
+  transform: translate3d(0, 110%, 0);
+  opacity: 0;
+  transition:
+    transform 1.05s var(--ease-out-expo) var(--word-delay),
+    opacity 0.8s var(--ease-out-expo) var(--word-delay);
+}
+
+.in .word {
+  transform: none;
+  opacity: 1;
+}
+
+.space {
+  display: inline-block;
+  width: 0.26em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}

@@ -1,0 +1,135 @@
+/* A sweep fill: the background wipes up from the bottom edge on hover,
+   and the label sits above it. */
+.base {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  isolation: isolate;
+  overflow: hidden;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  padding: 1.15rem 2.4rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color 0.45s var(--ease), border-color 0.45s var(--ease);
+}
+
+.base::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.55s var(--ease-out-expo);
+}
+
+.base:hover::before,
+.base:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.base i {
+  font-size: 0.72rem;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+
+.base:hover i {
+  transform: translateX(4px);
+}
+
+/* --- variants --- */
+
+.gold {
+  background: var(--gold);
+  color: var(--night);
+}
+.gold::before {
+  background: var(--night);
+}
+.gold:hover,
+.gold:focus-visible {
+  color: var(--gold-lt);
+}
+
+.outlineInk {
+  color: var(--ink);
+  border-color: var(--hair);
+  background: transparent;
+}
+.outlineInk::before {
+  background: var(--night);
+}
+.outlineInk:hover,
+.outlineInk:focus-visible {
+  color: var(--ivory);
+  border-color: var(--night);
+}
+
+.outlineLight {
+  color: var(--ivory);
+  border-color: rgba(247, 244, 238, 0.4);
+  background: transparent;
+}
+.outlineLight::before {
+  background: var(--ivory);
+}
+.outlineLight:hover,
+.outlineLight:focus-visible {
+  color: var(--night);
+  border-color: var(--ivory);
+}
+
+.block {
+  width: 100%;
+}
+
+/* A bare text link with a rule that grows in from the left. */
+.quiet {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  overflow: visible;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  cursor: pointer;
+}
+
+.quiet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.quiet:hover::before,
+.quiet:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.quiet i {
+  font-size: 0.7rem;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.quiet:hover i {
+  transform: translateX(5px);
+}

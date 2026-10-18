@@ -1,0 +1,23 @@
+.section {
+  position: relative;
+  padding: var(--space-section) 0;
+}
+
+.mist {
+  background: var(--sand);
+}
+
+.dark {
+  background: var(--night);
+  color: var(--ivory);
+}
+
+.dark h2,
+.dark h3,
+.dark h4 {
+  color: var(--ivory);
+}
+
+.dark p {
+  color: var(--smoke-lt);
+}

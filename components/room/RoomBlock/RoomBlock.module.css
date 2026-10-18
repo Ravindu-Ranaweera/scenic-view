@@ -1,0 +1,102 @@
+.block {
+  margin-bottom: 3rem;
+}
+
+.block:last-child {
+  margin-bottom: 0;
+}
+
+.block h2 {
+  position: relative;
+  font-size: var(--fs-h3);
+  margin-bottom: 1.4rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--hair);
+}
+
+/* A short gold tick where the rule starts. */
+.block h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 2.6rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+.checkList {
+  list-style: none;
+}
+
+.checkList li {
+  position: relative;
+  padding-left: 1.9rem;
+  margin-bottom: 0.7rem;
+  color: var(--smoke);
+}
+
+.checkList li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  color: var(--gold-dk);
+  font-size: 0.8rem;
+}
+
+.amenities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+  list-style: none;
+}
+
+.amenities li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0;
+  font-size: 0.94rem;
+  color: var(--smoke);
+}
+
+.amenities i {
+  color: var(--gold-dk);
+  width: 1.2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.policy {
+  background: var(--sand);
+  border-left: 2px solid var(--gold);
+  padding: 1.5rem 1.7rem;
+  border-radius: var(--radius);
+}
+
+.policy p:last-child {
+  margin-bottom: 0;
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.photoGrid img {
+  border-radius: var(--radius);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 575px) {
+  .amenities {
+    grid-template-columns: 1fr;
+  }
+}

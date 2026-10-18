@@ -1,0 +1,82 @@
+.hero {
+  position: relative;
+  padding: clamp(11rem, 8rem + 9vw, 16rem) 0 clamp(4.5rem, 3rem + 4vw, 7rem);
+  background: var(--night);
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+}
+
+.bg {
+  object-fit: cover;
+  z-index: 0;
+  transform: scale(1.05);
+  animation: kenburns 32s var(--ease) infinite alternate;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 17, 20, 0.84) 0%,
+    rgba(14, 17, 20, 0.52) 48%,
+    rgba(14, 17, 20, 0.88) 100%
+  );
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+}
+
+.inner h1 {
+  color: var(--ivory);
+  margin-bottom: 1.1rem;
+  font-size: var(--fs-h1);
+  letter-spacing: -0.03em;
+}
+
+.sub {
+  color: rgba(247, 244, 238, 0.78);
+  font-size: var(--fs-lead);
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+.crumbs {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 2.2rem;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.crumbs li {
+  color: var(--gold-lt);
+}
+
+.crumbs li + li::before {
+  content: "4";
+  margin-right: 0.7rem;
+  color: rgba(247, 244, 238, 0.3);
+}
+
+.crumbs a {
+  color: rgba(247, 244, 238, 0.7);
+}
+.crumbs a:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 575px) {
+  .hero {
+    padding: 10rem 0 4rem;
+  }
+}

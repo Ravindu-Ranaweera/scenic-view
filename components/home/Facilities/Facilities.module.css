@@ -1,0 +1,92 @@
+/* A hairline matrix rather than eight floating boxes — the shared
+   rules read as one considered list instead of a widget grid. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--hair);
+  border-left: 1px solid var(--hair);
+}
+
+.item {
+  position: relative;
+  padding: clamp(1.8rem, 1.2rem + 1.6vw, 2.8rem) clamp(1.2rem, 0.8rem + 1vw, 2rem);
+  border-right: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  overflow: hidden;
+  transition: color 0.5s var(--ease);
+}
+
+/* Gold wash wipes up behind the content on hover. */
+.item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(191, 160, 106, 0.1), rgba(191, 160, 106, 0.02));
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.item:hover::before {
+  transform: scaleY(1);
+}
+
+.item > * {
+  position: relative;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  height: 2.2rem;
+  font-size: 1.45rem;
+  color: var(--gold-dk);
+  margin-bottom: 1.4rem;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.item:hover .icon {
+  transform: translateY(-3px);
+}
+
+.item h3 {
+  font-size: 1.22rem;
+  margin-bottom: 0.5rem;
+}
+
+.item p {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* On a phone these become plain icon-and-name tiles, two across. The
+   descriptions are the first thing to go: at this width they turned a
+   compact grid into a long scroll. */
+@media (max-width: 767px) {
+  .item {
+    padding: 1.6rem 0.75rem;
+    text-align: center;
+  }
+
+  .item p {
+    display: none;
+  }
+
+  .icon {
+    justify-content: center;
+    font-size: 1.35rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .item h3 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+}

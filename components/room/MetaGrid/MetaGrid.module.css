@@ -1,0 +1,51 @@
+/* A hairline row rather than filled boxes — the specs read as a
+   spec sheet instead of five widgets. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(122px, 1fr));
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+}
+
+.box {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-right: 1px solid var(--hair);
+}
+
+.box:last-child {
+  border-right: 0;
+}
+
+.box i {
+  color: var(--gold-dk);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.box strong {
+  display: block;
+  font-family: var(--serif);
+  font-variant-numeric: lining-nums;
+  font-size: 1.22rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.box span {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 575px) {
+  .box {
+    border-bottom: 1px solid var(--hair);
+  }
+}

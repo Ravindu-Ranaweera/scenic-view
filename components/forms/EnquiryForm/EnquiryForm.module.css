@@ -1,0 +1,97 @@
+.card {
+  position: relative;
+  background: var(--bone);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+  box-shadow: var(--shadow-soft);
+}
+
+.card h3 {
+  margin-bottom: 0.4rem;
+}
+
+.cardNote {
+  font-size: 0.86rem;
+  margin-bottom: 2.2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.6rem;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.field {
+  margin-bottom: 1.7rem;
+}
+
+.field label {
+  display: block;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 0.6rem;
+}
+
+/* Underline fields — lighter than boxes, and they keep the card
+   from reading as a form grid. */
+.input {
+  width: 100%;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--hair);
+  border-radius: 0;
+  padding: 0.45rem 0 0.65rem;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--ink);
+  transition: border-color 0.4s var(--ease);
+}
+
+.input::placeholder {
+  color: rgba(118, 125, 135, 0.6);
+}
+
+.input:hover {
+  border-bottom-color: var(--hair-gold);
+}
+
+.input:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+}
+
+select.input {
+  cursor: pointer;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 5.5rem;
+  line-height: 1.6;
+}
+
+.status {
+  font-size: 0.8rem;
+  color: var(--smoke);
+  margin: 1.3rem 0 0;
+  text-align: center;
+}
+
+.error {
+  color: var(--ember);
+}
+
+@media (max-width: 575px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

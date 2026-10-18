@@ -1,0 +1,133 @@
+.wrap {
+  position: relative;
+}
+
+/* An oversized quote mark sitting behind the cards. */
+.glyph {
+  position: absolute;
+  top: -3.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif);
+  font-size: clamp(11rem, 7rem + 16vw, 20rem);
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 0.6rem + 1.4vw, 2rem);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: clamp(1.8rem, 1.3rem + 1.4vw, 2.6rem);
+  background: var(--bone);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-lg);
+  transition:
+    transform 0.7s var(--ease-out-expo),
+    box-shadow 0.7s var(--ease-out-expo),
+    border-color 0.5s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--hair-gold);
+}
+
+.stars {
+  display: flex;
+  gap: 0.22rem;
+  color: var(--gold);
+  font-size: 0.7rem;
+  margin-bottom: 1.4rem;
+}
+
+.quote {
+  font-family: var(--serif);
+  font-size: clamp(1.18rem, 1.05rem + 0.5vw, 1.42rem);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0 0 auto;
+  padding-bottom: 1.8rem;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--hair);
+}
+
+/* Circular portrait beside the name. 72px is about the limit these
+   source photographs support: two of them crop to ~131px of real
+   detail, so a larger circle would only be upscaled. */
+.avatar {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--hair-gold);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+/* Country and date sit on separate lines: on one line the longer
+   country names wrapped and knocked the card bottoms out of alignment. */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-top: 0.35rem;
+}
+
+.date {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--smoke);
+  margin-top: 0.2rem;
+}
+
+.flag {
+  width: 18px;
+  height: 12px;
+  border-radius: 1px;
+  /* A hairline keeps the white band of a tricolour from vanishing. */
+  box-shadow: 0 0 0 1px rgba(20, 23, 26, 0.16);
+}
+
+
+
+@media (max-width: 991px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

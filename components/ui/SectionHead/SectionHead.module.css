@@ -1,0 +1,9 @@
+.head {
+  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  max-width: 46rem;
+}
+
+.centered {
+  text-align: center;
+  margin-inline: auto;
+}

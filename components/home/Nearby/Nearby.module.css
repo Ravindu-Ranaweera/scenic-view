@@ -1,0 +1,243 @@
+/* The whole section is sized to one screen. element+class beats the
+   shared Section rule, whose much larger padding would otherwise win. */
+section.section {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(2.5rem, 5vh, 4rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 0.92fr;
+  gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+  align-items: center;
+  width: 100%;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.copy h2 {
+  font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3rem);
+  margin-bottom: 0.9rem;
+}
+
+.intro {
+  max-width: 32rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.6rem;
+}
+
+.list {
+  list-style: none;
+}
+
+/* Compact rows: name and distance on one line, one line of detail under. */
+.item {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair-light);
+  transition: border-color 0.5s var(--ease);
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+.item:hover {
+  border-bottom-color: var(--hair-gold);
+}
+
+.num {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  color: rgba(247, 244, 238, 0.4);
+  padding-top: 0.3rem;
+  font-variant-numeric: lining-nums;
+  transition: color 0.45s var(--ease);
+}
+
+.item:hover .num {
+  color: var(--gold);
+}
+
+.body {
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.item:hover .body {
+  transform: translateX(5px);
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.8rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.dist {
+  font-family: var(--sans);
+  font-variant-numeric: lining-nums;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  white-space: nowrap;
+}
+
+.item p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  /* One line only, so seven rows stay inside one screen. */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- the collage, sized to fill the column exactly --- */
+
+.collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* A definite height, so the 1fr rows have something to resolve
+     against. Left to stretch, they fall back to the images' natural
+     size and the section grows to twice the viewport. */
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.4rem, 0.25rem + 0.5vw, 0.75rem);
+  height: clamp(20rem, 62svh, 34rem);
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--slate-deep);
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out-expo);
+}
+
+.tile:hover img {
+  transform: scale(1.07);
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(10, 13, 16, 0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+
+.tile:hover::after {
+  opacity: 1;
+}
+
+.caption {
+  position: absolute;
+  left: 0.8rem;
+  right: 0.8rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.55s var(--ease-out-expo);
+}
+
+.tile:hover .caption {
+  opacity: 1;
+  transform: none;
+}
+
+@media (hover: none) {
+  .tile::after,
+  .caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* On a wide screen the rows carry name and distance only. Seven rows
+   with a line of description underneath overflowed the viewport, and the
+   collage beside them already supplies the interest. The descriptions
+   stay on narrow screens, where the section scrolls anyway. */
+@media (min-width: 992px) {
+  .item {
+    align-items: baseline;
+    padding: 0.7rem 0;
+  }
+  .item p {
+    display: none;
+  }
+  .title {
+    font-size: 1.15rem;
+    margin-bottom: 0;
+  }
+}
+
+/* Short laptop screens: tighten further and drop the intro. */
+@media (min-width: 992px) and (max-height: 880px) {
+  .copy h2 {
+    font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.2rem);
+    margin-bottom: 0.7rem;
+  }
+  .intro {
+    display: none;
+  }
+  .item {
+    padding: 0.55rem 0;
+  }
+  .title {
+    font-size: 1rem;
+  }
+  .collage {
+    height: clamp(18rem, 66svh, 30rem);
+  }
+}
+
+/* Below this the one-screen constraint stops being useful: the two
+   columns stack and the content is simply taller than a phone. */
+@media (max-width: 991px) {
+  .section {
+    min-height: 0;
+    padding-block: clamp(4rem, 8vw, 6rem);
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .collage {
+    grid-template-rows: repeat(3, clamp(120px, 26vw, 190px));
+    height: auto;
+  }
+  section.section {
+    display: block;
+  }
+  .item p {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+}

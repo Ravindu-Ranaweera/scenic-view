@@ -1,0 +1,112 @@
+.wrap {
+  position: relative;
+}
+
+.bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: -4.5rem;
+  margin-bottom: 1.6rem;
+}
+
+/* One line that slides. --per is how many cards are in view; the
+   fractional value leaves the next card peeking, which is what tells
+   people it moves. */
+.track {
+  --gap: clamp(0.8rem, 0.5rem + 1vw, 1.5rem);
+  --per: 4.2;
+
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 0;
+  padding-bottom: 0.4rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track > * {
+  flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
+  scroll-snap-align: start;
+}
+
+/* --- arrows, for people without a trackpad --- */
+
+.btn {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hair);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    background 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    color 0.4s var(--ease),
+    opacity 0.3s var(--ease);
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--night);
+  border-color: var(--night);
+  color: var(--ivory);
+}
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* --- progress line, instead of dots --- */
+
+.progress {
+  position: relative;
+  height: 1px;
+  background: var(--hair);
+  margin-top: 1.4rem;
+}
+
+.progressBar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 25%;
+  background: var(--gold);
+  transition: transform 0.25s linear;
+}
+
+@media (max-width: 1200px) {
+  .track {
+    --per: 3.2;
+  }
+}
+
+@media (max-width: 991px) {
+  .track {
+    --per: 2.2;
+  }
+  .bar {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .track {
+    --per: 1.15;
+    /* Run to the screen edge while the first card keeps the gutter. */
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+  }
+}

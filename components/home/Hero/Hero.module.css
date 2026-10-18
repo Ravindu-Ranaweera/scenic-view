@@ -1,0 +1,178 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  background: var(--night);
+  color: var(--ivory);
+  overflow: hidden;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* A very slow push-in. 28s is long enough that it reads as the
+   image breathing rather than as an animation. */
+.bg {
+  object-fit: cover;
+  transform: scale(1.06);
+  animation: kenburns 28s var(--ease) infinite alternate;
+}
+
+/* Tuned for a bright daylight photograph: the hero image is a green
+   hillside, not a dark sunrise, so the text needs a heavier scrim than
+   a dark image would. The left-weighted sweep keeps the right side of
+   the frame — where the property sits — comparatively clear. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 13, 16, 0.72) 0%,
+      rgba(10, 13, 16, 0.42) 34%,
+      rgba(10, 13, 16, 0.72) 68%,
+      rgba(10, 13, 16, 0.96) 100%
+    ),
+    linear-gradient(
+      100deg,
+      rgba(10, 13, 16, 0.78) 0%,
+      rgba(10, 13, 16, 0.4) 42%,
+      transparent 74%
+    );
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: calc(var(--header-h) + 5rem) 0 clamp(3rem, 2rem + 4vw, 6rem);
+}
+
+.label {
+  color: var(--gold-lt);
+}
+
+.title {
+  font-size: var(--fs-display);
+  color: var(--ivory);
+  max-width: 15ch;
+  letter-spacing: -0.035em;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--gold-lt);
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin-top: clamp(2rem, 1.2rem + 2.4vw, 3.5rem);
+}
+
+.sub {
+  color: rgba(247, 244, 238, 0.82);
+  max-width: 32rem;
+  font-size: var(--fs-lead);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* --- the thin stat rail along the bottom --- */
+
+.rail {
+  display: grid;
+  grid-template-columns: repeat(3, auto) 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 2.5vw, 3.5rem);
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--hair-light);
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.statNum {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem);
+  line-height: 1;
+  color: var(--gold-lt);
+}
+
+.statLabel {
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 238, 0.55);
+}
+
+.cue {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 238, 0.55);
+}
+
+.cueLine {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 46px;
+  background: var(--hair-light);
+  overflow: hidden;
+}
+
+.cueLine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  animation: cueDrop 2.4s var(--ease) infinite;
+}
+
+@keyframes cueDrop {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media (max-width: 900px) {
+  .rail {
+    grid-template-columns: repeat(3, auto);
+  }
+  .cue {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .rail {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1.2rem;
+  }
+}
