@@ -6,7 +6,7 @@ import { useState } from "react";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton/WhatsAppButton";
 import { Button } from "@/components/ui/Button/Button";
 import { hotel, telHref } from "@/content/hotel";
-import { formatRate, stayExtras } from "@/content/rooms";
+import { stayExtras } from "@/content/rooms";
 import type { Room } from "@/lib/types";
 import { useDateRange } from "@/lib/useDateRange";
 
@@ -48,9 +48,8 @@ export function BookingWidget({ room }: { room: Room }) {
     <div className={styles.sidebar}>
       <div className={styles.widget}>
         <div className={styles.rateHead}>
-          <div className={styles.amount}>{formatRate(room.priceLKR)}</div>
           <div className={styles.per}>
-            Per night &middot; breakfast included
+            Breakfast included &middot; we confirm every booking by hand
           </div>
         </div>
 

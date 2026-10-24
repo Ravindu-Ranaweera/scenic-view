@@ -1,3 +1,11 @@
+/* Tighter rhythm than the default section, so the whole
+   section fits a single screen under the header. */
+/* Doubled class so it outranks the base .section padding
+   regardless of stylesheet order. */
+.compact.compact {
+  padding: clamp(2.5rem, 1.5rem + 3vw, 4rem) 0;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -14,15 +22,17 @@
 }
 
 .copy h2 {
-  margin-bottom: 1.6rem;
+  font-size: clamp(1.9rem, 1.2rem + 2.4vw, 2.9rem);
+  margin-bottom: 1.1rem;
 }
 
 .lead {
   font-family: var(--serif);
-  font-size: clamp(1.2rem, 1.05rem + 0.75vw, 1.55rem);
-  line-height: 1.5;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
   color: var(--ink);
-  margin-bottom: 1.3rem;
+  margin-bottom: 0.9rem;
 }
 
 .facts {
@@ -61,7 +71,7 @@
 
 .arch {
   position: relative;
-  width: min(100%, 23rem);
+  width: min(100%, 21rem);
 }
 
 /* A capsule: fully rounded at the head and the foot. */
@@ -90,8 +100,8 @@
 /* The same capsule as a hairline of gold, sitting a little proud of it. */
 .outline {
   position: absolute;
-  inset: -1.1rem -0.7rem -0.5rem -1.3rem;
-  border: 1px solid var(--hair-gold);
+  inset: -1.4rem -1rem -0.8rem -1.6rem;
+  border: 2px solid var(--hair-gold);
   border-radius: 15rem;
   z-index: 0;
   pointer-events: none;

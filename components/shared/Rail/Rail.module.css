@@ -110,3 +110,26 @@
     scroll-padding-inline: var(--gutter);
   }
 }
+
+/* --- fixed cards per view, after the breakpoints so they win --- */
+
+.track.perTwo {
+  --per: 2;
+}
+
+.track.perThree {
+  --per: 3;
+}
+
+@media (max-width: 1200px) {
+  .track.perThree {
+    --per: 2.1;
+  }
+}
+
+@media (max-width: 767px) {
+  .track.perTwo,
+  .track.perThree {
+    --per: 1.1;
+  }
+}

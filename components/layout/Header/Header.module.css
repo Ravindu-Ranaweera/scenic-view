@@ -13,7 +13,7 @@
 
 /* Frosted once past the hero, rather than a flat fill. */
 .stuck {
-  background: rgba(14, 17, 20, 0.72);
+  background: rgba(14, 79, 91, 0.72);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-bottom-color: var(--hair-light);
@@ -34,29 +34,20 @@
 
 .brand {
   display: flex;
-  flex-direction: column;
-  line-height: 1;
+  align-items: center;
 }
 
-.brandName {
-  font-family: var(--serif);
-  font-size: 1.7rem;
-  letter-spacing: 0.01em;
-  color: var(--ivory);
-}
-
-.brandTag {
-  font-size: 0.56rem;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  margin-top: 0.42rem;
+/* The logo is white-on-transparent, so it reads over the hero and the
+   solid header alike. Height drives the size; width follows. */
+.logo {
+  height: 4.2rem;
+  width: auto;
 }
 
 .toggle {
   display: none;
   background: transparent;
-  border: 1px solid rgba(247, 244, 238, 0.28);
+  border: 1px solid rgba(250, 249, 246, 0.28);
   border-radius: var(--radius);
   color: var(--ivory);
   padding: 0.5rem 0.75rem;
@@ -75,9 +66,10 @@
   display: block;
   padding: 0.5rem 1.05rem;
   font-size: var(--fs-micro);
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(247, 244, 238, 0.78);
+  color: rgba(250, 249, 246, 0.85);
   transition: color 0.4s var(--ease);
 }
 
@@ -121,7 +113,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: rgba(14, 17, 20, 0.97);
+    background: rgba(14, 79, 91, 0.97);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--hair-light);

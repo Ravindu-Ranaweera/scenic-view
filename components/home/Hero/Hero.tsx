@@ -1,8 +1,8 @@
 import Image from "next/image";
 
+import { CheckAvailability } from "@/components/home/CheckAvailability/CheckAvailability";
 import { ButtonLink } from "@/components/ui/Button/Button";
 import { Container } from "@/components/ui/Container/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { SplitHeading } from "@/components/ui/SplitHeading/SplitHeading";
 import { hotel } from "@/content/hotel";
@@ -35,12 +35,6 @@ export function Hero() {
 
       <Container>
         <div className={styles.inner}>
-          <Reveal variant="up">
-            <Eyebrow onDark>
-              <span className={styles.label}>{heroCopy.eyebrow}</span>
-            </Eyebrow>
-          </Reveal>
-
           <SplitHeading
             as="h1"
             text={heroCopy.heading}
@@ -55,9 +49,9 @@ export function Hero() {
 
             <Reveal variant="up" delay={640}>
               <div className={styles.actions}>
-                <ButtonLink href="/#rooms">View Rooms</ButtonLink>
-                <ButtonLink href="/#contact" variant="outlineLight">
-                  Enquire
+                <CheckAvailability />
+                <ButtonLink href="/#rooms" variant="outlineLight">
+                  View Rooms
                 </ButtonLink>
               </div>
             </Reveal>

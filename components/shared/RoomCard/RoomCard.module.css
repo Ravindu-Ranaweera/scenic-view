@@ -1,28 +1,21 @@
-/* One image-led tile: the photograph is the card, and the copy sits on
-   it. The previous version stacked a photo, a badge pill, a price strip
-   and a bordered white panel, which read as four parts fighting. */
+/* Photo first, copy on the page below it. The photograph carries a
+   round "View" badge on hover, and the whole card is one link via the
+   title's covering pseudo-element. */
 
 .card {
   position: relative;
   display: block;
   height: 100%;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--slate-deep);
-  isolation: isolate;
-  transition: transform 0.7s var(--ease-out-expo), box-shadow 0.7s var(--ease-out-expo);
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lift);
 }
 
 /* --- image --- */
 
 .media {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 7 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--slate-deep);
 }
 
 .media img {
@@ -33,165 +26,114 @@
 }
 
 .card:hover .media img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-/* Top scrim only, so the numeral stays readable. The copy at the foot
-   gets its own backdrop sized to the text block, which is the only way
-   to stay legible over these very bright room photographs. */
-.scrim {
+/* The round badge in the middle of the photograph. */
+.view {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 13, 16, 0.46) 0%,
-    rgba(10, 13, 16, 0.06) 28%,
-    rgba(10, 13, 16, 0) 55%
-  );
-  transition: opacity 0.6s var(--ease);
-}
-
-.card:hover .body::before {
-  opacity: 0.92;
-}
-
-/* --- the numeral, top left --- */
-
-.index {
-  position: absolute;
-  top: 1.1rem;
-  left: 1.3rem;
-  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(10, 58, 67, 0.72);
+  color: var(--ivory);
   font-family: var(--serif);
-  font-size: 1.15rem;
-  line-height: 1;
-  color: rgba(247, 244, 238, 0.55);
-  font-variant-numeric: lining-nums;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.6s var(--ease-out-expo);
+  pointer-events: none;
 }
 
-.index::after {
-  content: "";
-  display: block;
-  width: 1.6rem;
-  height: 1px;
-  margin-top: 0.5rem;
-  background: var(--gold);
-  transform: scaleX(0.4);
-  transform-origin: left;
-  transition: transform 0.6s var(--ease-out-expo);
+.card:hover .view {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-.card:hover .index::after {
-  transform: scaleX(1);
-}
-
-/* --- content, over the foot of the image --- */
+/* --- copy below the photograph --- */
 
 .body {
-  position: absolute;
-  inset: auto 0 0 0;
-  z-index: 2;
-  padding: 1.4rem 1.3rem 1.5rem;
-  color: var(--ivory);
+  padding-top: 1.3rem;
 }
 
-/* Fades in above the text and goes near-solid behind it. */
-.body::before {
-  content: "";
-  position: absolute;
-  inset: -3.2rem 0 0 0;
-  z-index: -1;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 13, 16, 0) 0%,
-    rgba(10, 13, 16, 0.55) 32%,
-    rgba(10, 13, 16, 0.88) 62%,
-    rgba(10, 13, 16, 0.95) 100%
-  );
-  transition: opacity 0.6s var(--ease);
-}
-
-.badge {
-  display: inline-block;
-  font-size: 0.58rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  margin-bottom: 0.6rem;
-}
-
-.body h3 {
-  font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
-  color: var(--ivory);
-  margin-bottom: 0.5rem;
-}
-
-/* Plain text rather than an icon row — the icons read as clip art at
-   this size and repeated the words beside them. */
-.meta {
-  font-size: 0.64rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(247, 244, 238, 0.62);
-  margin-bottom: 0.9rem;
-}
-
-.foot {
+.titleRow {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding-top: 0.95rem;
-  border-top: 1px solid rgba(247, 244, 238, 0.18);
-}
-
-.rate {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  line-height: 1.1;
-  font-variant-numeric: lining-nums tabular-nums;
-}
-
-.rate small {
-  display: block;
-  font-family: var(--sans);
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(247, 244, 238, 0.52);
-  margin-top: 0.25rem;
-}
-
-.cue {
-  display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  white-space: nowrap;
-  padding-bottom: 0.2rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.cue i {
-  transition: transform 0.5s var(--ease-out-expo);
+.titleRow h3 {
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
+  color: var(--ink);
+  margin: 0;
 }
 
-.card:hover .cue i {
-  transform: translateX(5px);
+.titleRow h3 a {
+  color: inherit;
 }
 
-/* The whole tile is the link; the title carries the accessible name. */
-.body h3 a::after {
+/* The whole card is the link. The title carries the accessible name. */
+.titleRow h3 a::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 1;
 }
 
-.body h3 a {
-  color: inherit;
+.arrow {
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  color: var(--ink);
+  transition:
+    background 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    color 0.4s var(--ease);
+}
+
+.card:hover .arrow {
+  background: var(--night);
+  border-color: var(--night);
+  color: var(--ivory);
+}
+
+/* --- the two labelled fields --- */
+
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hair);
+}
+
+.facts dt {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 0.4rem;
+}
+
+.facts dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--ink);
 }
 
 /* --- compact variant, used on the room pages --- */
@@ -201,5 +143,14 @@
 }
 
 .compact .body {
-  padding: 1.1rem 1.1rem 1.2rem;
+  padding-top: 1rem;
+}
+
+.compact .titleRow h3 {
+  font-size: 1.25rem;
+}
+
+.compact .arrow {
+  width: 2.2rem;
+  height: 2.2rem;
 }

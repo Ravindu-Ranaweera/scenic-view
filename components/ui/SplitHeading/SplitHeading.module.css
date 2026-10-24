@@ -38,3 +38,8 @@
     transition: none;
   }
 }
+
+/* One forced line of the heading (text split on "\n"). */
+.row {
+  display: block;
+}

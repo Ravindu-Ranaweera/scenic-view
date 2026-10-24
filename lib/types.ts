@@ -79,8 +79,10 @@ export type Testimonial = {
   countryCode: string;
   /** Already formatted for display, e.g. "14 September 2026". */
   date: string;
-  /** Image id under /img. */
-  image: string;
+  /** Image id under /img. Omitted until the guest photo arrives. */
+  image?: string;
+  /** Stars out of 5. Omitted means 5. */
+  rating?: number;
 };
 
 export type GalleryTile = {

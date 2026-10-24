@@ -1,6 +1,6 @@
 .footer {
   background: var(--ink);
-  color: rgba(245, 243, 240, 0.68);
+  color: rgba(250, 249, 246, 0.68);
   padding: 5rem 0 0;
 }
 
@@ -35,12 +35,10 @@
   margin-bottom: 0.6rem;
 }
 
-.brandName {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.9rem);
-  color: var(--ivory);
+.logo {
   display: block;
-  letter-spacing: -0.015em;
+  width: min(100%, 15rem);
+  height: auto;
 }
 
 .blurb {

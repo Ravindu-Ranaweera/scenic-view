@@ -8,11 +8,11 @@ import type { Hotel } from "@/lib/types";
  */
 export const hotel: Hotel = {
   name: "Scenic View Ella",
-  shortName: "Scenic View",
+  shortName: "Scenic View Ella",
   location: "Ella, Sri Lanka",
   tagline:
     "A small hotel on the hillside above Ella, where every room opens onto the mountains and the morning arrives over a sea of cloud.",
-  roomCount: 8,
+  roomCount: 4,
 
   street: "12/A Mahamewnawa Road",
   town: "Kumbalwela, Ella",
@@ -30,9 +30,21 @@ export const hotel: Hotel = {
   email: "scenicviewella@gmail.com",
 
   social: [
-    { label: "Instagram", href: "#", icon: "fa-brands fa-instagram" },
-    { label: "Facebook", href: "#", icon: "fa-brands fa-facebook-f" },
-    { label: "TripAdvisor", href: "#", icon: "fa-brands fa-tripadvisor" },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/scenicview_ella",
+      icon: "fa-brands fa-instagram",
+    },
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/share/1Dk7pHavcv/",
+      icon: "fa-brands fa-facebook-f",
+    },
+    {
+      label: "TikTok",
+      href: "https://www.tiktok.com/@scenicview_ella",
+      icon: "fa-brands fa-tiktok",
+    },
     { label: "WhatsApp", href: "https://wa.me/94716300888", icon: "fa-brands fa-whatsapp" },
   ],
 };

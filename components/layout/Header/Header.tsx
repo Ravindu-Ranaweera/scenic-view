@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,6 +10,7 @@ import { Container } from "@/components/ui/Container/Container";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { bookingUrl, hotel } from "@/content/hotel";
 import { navLinks } from "@/content/site";
+import { asset } from "@/lib/assets";
 
 import styles from "./Header.module.css";
 
@@ -53,8 +55,14 @@ export function Header() {
       <Container>
         <div className={styles.bar}>
           <Link href="/" className={styles.brand}>
-            <span className={styles.brandName}>{hotel.shortName}</span>
-            <span className={styles.brandTag}>{hotel.location}</span>
+            <Image
+              className={styles.logo}
+              src={asset("/img/logo-white.png")}
+              alt={hotel.name}
+              width={900}
+              height={502}
+              priority
+            />
           </Link>
 
           <button

@@ -68,6 +68,18 @@ export function Contact() {
           <EnquiryForm />
         </Suspense>
       </div>
+
+      <div className={styles.map}>
+        <iframe
+          title={`Map showing ${hotel.name}`}
+          src={`https://www.google.com/maps?q=${encodeURIComponent(
+            `${hotel.name}, ${hotel.address}`,
+          )}&output=embed`}
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
     </Section>
   );
 }

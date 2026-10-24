@@ -1,96 +1,21 @@
 import type { Extra, Room } from "@/lib/types";
 
 /**
- * The five room types, taken from the hotel's own Booking.com listing.
+ * The four room types, as confirmed by the owner. `bookingName` keeps
+ * Booking.com's wording where a matching listing exists.
  *
- * Booking lists two of them under the identical name "Double Room with
- * Mountain View" (22 m² and 28 m²). They are named apart here so a guest
- * can tell which is which; `bookingName` keeps Booking's exact wording so
- * the two listings can still be matched up.
- *
- * Rates are the nightly prices shown for a single night in late October
- * 2026 and exclude taxes. Booking prices move with demand, so TO CONFIRM:
- * replace these with your own standard direct rates.
- *
- * Note: every room sleeps two. There is no family room and nothing here
- * sleeps four.
+ * Rates are deliberately not published. The owner asked for no prices
+ * on the site, so priceLKR and taxesLKR stay null and nothing renders them.
  */
 export const rooms: Room[] = [
-  {
-    slug: "mountain-view-double",
-    bookingName: "Double Room with Mountain View",
-    name: "Mountain View Double",
-    badge: "Best value",
-    tagline: "A queen bed, a balcony, and the valley straight in front of it.",
-    priceLKR: 16565,
-    taxesLKR: 2982,
-    guests: 2,
-    beds: "1 Queen",
-    bathroom: "Private",
-    outlook: "Mountain view",
-    outlookIcon: "fa-solid fa-mountain-sun",
-    size: "22 m²",
-    images: ["comfort-03", "comfort-01", "comfort-02", "comfort-04"],
-    intro:
-      "Our smallest and best-value room, and the one that goes first. A queen bed, a wardrobe, and a private bathroom with a hot shower, with the balcony doors opening onto the valley.",
-    detail:
-      "This is the one room without air conditioning. At this elevation the nights are cool enough that most guests never reach for it, but if you want it, take one of the 28 m² rooms instead.",
-    cardMeta: [
-      { icon: "fa-solid fa-bed", label: "1 Queen" },
-      { icon: "fa-solid fa-user-group", label: "2 Guests" },
-      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "22 m²" },
-    ],
-    amenities: [
-      { icon: "fa-solid fa-mountain-sun", label: "Balcony and terrace" },
-      { icon: "fa-solid fa-binoculars", label: "Mountain view" },
-      { icon: "fa-solid fa-shower", label: "Attached bathroom" },
-      { icon: "fa-solid fa-tv", label: "Flat-screen TV" },
-      { icon: "fa-solid fa-wifi", label: "Free Wi-Fi" },
-      { icon: "fa-solid fa-utensils", label: "Continental breakfast" },
-    ],
-  },
-  {
-    slug: "mountain-view-king",
-    bookingName: "Double Room with Mountain View (28 m²)",
-    name: "Mountain View King",
-    badge: "King bed",
-    tagline: "The same view, a king bed, and air conditioning.",
-    priceLKR: 17890,
-    taxesLKR: 3220,
-    guests: 2,
-    beds: "1 King",
-    bathroom: "Private",
-    outlook: "Mountain view",
-    outlookIcon: "fa-solid fa-mountain-sun",
-    size: "28 m²",
-    images: ["deluxe-01", "deluxe-02", "deluxe-05"],
-    intro:
-      "Six square metres more than the 22 m² double, a king bed instead of a queen, and air conditioning for the warmer months. The balcony looks the same way down the valley.",
-    detail:
-      "Air conditioning, a flat-screen television, and a private bathroom with a hot shower. If you are staying more than a night, the extra floor space earns itself.",
-    cardMeta: [
-      { icon: "fa-solid fa-bed", label: "1 King" },
-      { icon: "fa-solid fa-user-group", label: "2 Guests" },
-      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "28 m²" },
-    ],
-    amenities: [
-      { icon: "fa-solid fa-mountain-sun", label: "Balcony and terrace" },
-      { icon: "fa-solid fa-binoculars", label: "Mountain view" },
-      { icon: "fa-solid fa-snowflake", label: "Air conditioning" },
-      { icon: "fa-solid fa-shower", label: "Attached bathroom" },
-      { icon: "fa-solid fa-tv", label: "Flat-screen TV" },
-      { icon: "fa-solid fa-wifi", label: "Free Wi-Fi" },
-      { icon: "fa-solid fa-utensils", label: "Continental breakfast" },
-    ],
-  },
   {
     slug: "mountain-view-twin",
     bookingName: "Twin Room with Mountain View",
     name: "Mountain View Twin",
     badge: "Twin beds",
     tagline: "Two full beds, a balcony, and a table to sit at.",
-    priceLKR: 19878,
-    taxesLKR: 3578,
+    priceLKR: null,
+    taxesLKR: null,
     guests: 2,
     beds: "2 Full",
     bathroom: "Private",
@@ -123,8 +48,8 @@ export const rooms: Room[] = [
     name: "Deluxe Double with Balcony",
     badge: "Minibar",
     tagline: "A king bed, a minibar, and the best balcony in the house.",
-    priceLKR: 21534,
-    taxesLKR: 3876,
+    priceLKR: null,
+    taxesLKR: null,
     guests: 2,
     beds: "1 King",
     bathroom: "Private",
@@ -153,14 +78,47 @@ export const rooms: Room[] = [
     ],
   },
   {
-    slug: "mountain-view-double-twin",
-    bookingName: "Double or Twin Room with Mountain View",
-    name: "Mountain View Double or Twin",
-    badge: "Largest",
-    tagline: "Our largest room, with two queen beds and space to spread out.",
-    priceLKR: 23191,
-    taxesLKR: 4174,
+    slug: "mountain-view-double",
+    bookingName: "Double Room with Mountain View",
+    name: "Mountain View Double",
+    badge: "Best value",
+    tagline: "A queen bed, a balcony, and the valley straight in front of it.",
+    priceLKR: null,
+    taxesLKR: null,
     guests: 2,
+    beds: "1 Queen",
+    bathroom: "Private",
+    outlook: "Mountain view",
+    outlookIcon: "fa-solid fa-mountain-sun",
+    size: "22 m²",
+    images: ["comfort-01", "comfort-03", "comfort-02", "comfort-04"],
+    intro:
+      "Our smallest and best-value room, and the one that goes first. A queen bed, a wardrobe, and a private bathroom with a hot shower, with the balcony doors opening onto the valley.",
+    detail:
+      "This is the one room without air conditioning. At this elevation the nights are cool enough that most guests never reach for it, but if you want it, take one of the 28 m² rooms instead.",
+    cardMeta: [
+      { icon: "fa-solid fa-bed", label: "1 Queen" },
+      { icon: "fa-solid fa-user-group", label: "2 Guests" },
+      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "22 m²" },
+    ],
+    amenities: [
+      { icon: "fa-solid fa-mountain-sun", label: "Balcony and terrace" },
+      { icon: "fa-solid fa-binoculars", label: "Mountain view" },
+      { icon: "fa-solid fa-shower", label: "Attached bathroom" },
+      { icon: "fa-solid fa-tv", label: "Flat-screen TV" },
+      { icon: "fa-solid fa-wifi", label: "Free Wi-Fi" },
+      { icon: "fa-solid fa-utensils", label: "Continental breakfast" },
+    ],
+  },
+  {
+    slug: "deluxe-family-room",
+    bookingName: "Deluxe Family Room",
+    name: "Deluxe Family Room",
+    badge: "Largest",
+    tagline: "Our largest room, with two queen beds and space for the family.",
+    priceLKR: null,
+    taxesLKR: null,
+    guests: 4,
     beds: "2 Queen",
     bathroom: "Private",
     outlook: "Mountain view",
@@ -168,12 +126,12 @@ export const rooms: Room[] = [
     size: "33 m²",
     images: ["family-03", "family-02", "family-04", "family-01"],
     intro:
-      "Thirty-three square metres and two queen beds, so it works either as a generous double or as a twin. Tell us which you would like and we will make it up that way.",
+      "Thirty-three square metres and two queen beds, with room for a family of four to spread out. Tell us how you would like the beds made up and we will have it ready.",
     detail:
-      "Air conditioning, a writing desk, and balcony doors onto the same view as every other room in the house. It still sleeps two.",
+      "Air conditioning, a writing desk, and balcony doors onto the same view as every other room in the house.",
     cardMeta: [
       { icon: "fa-solid fa-bed", label: "2 Queen" },
-      { icon: "fa-solid fa-user-group", label: "2 Guests" },
+      { icon: "fa-solid fa-user-group", label: "4 Guests" },
       { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "33 m²" },
     ],
     amenities: [

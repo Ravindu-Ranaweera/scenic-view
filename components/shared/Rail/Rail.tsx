@@ -16,10 +16,13 @@ import styles from "./Rail.module.css";
 export function Rail({
   children,
   label,
+  perView,
 }: {
   children: React.ReactNode;
   /** Names the scrollable region for assistive technology. */
   label: string;
+  /** Full cards per view. Omit for the default four-and-a-peek. */
+  perView?: 2 | 3;
 }) {
   const track = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
@@ -93,7 +96,13 @@ export function Rail({
 
       <div
         ref={track}
-        className={styles.track}
+        className={[
+          styles.track,
+          perView === 2 && styles.perTwo,
+          perView === 3 && styles.perThree,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         role="region"
         aria-label={label}
         tabIndex={0}

@@ -3,7 +3,6 @@ import { RoomCard } from "@/components/shared/RoomCard/RoomCard";
 import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { Section } from "@/components/ui/Section/Section";
-import { hotel } from "@/content/hotel";
 import { rooms } from "@/content/rooms";
 
 import styles from "./RoomGrid.module.css";
@@ -15,21 +14,22 @@ export function RoomGrid() {
         <div>
           <Eyebrow>Rooms</Eyebrow>
           <h2>
-            {rooms.length === 5 ? "Five" : rooms.length} kinds of room.{" "}
-            {hotel.roomCount} in total.
+            {["No", "One", "Two", "Three", "Four", "Five"][rooms.length] ??
+              rooms.length}{" "}
+            rooms. Every one facing the mountains.
           </h2>
         </div>
         <p>
           Every room has a mountain view, a private balcony or terrace, a hot
-          shower, a television and free Wi-Fi. Breakfast is included; rates are
-          shown before taxes.
+          shower, a television and free Wi-Fi. Breakfast is included with
+          every room.
         </p>
       </div>
 
-      <Rail label="Rooms">
+      <Rail label="Rooms" perView={2}>
         {rooms.map((room, index) => (
-          <Reveal key={room.slug} variant="up" delay={index * 90}>
-            <RoomCard room={room} index={index + 1} />
+          <Reveal key={room.slug} variant="up" delay={(index % 2) * 90}>
+            <RoomCard room={room} />
           </Reveal>
         ))}
       </Rail>

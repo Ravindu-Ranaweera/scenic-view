@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { NewsletterForm } from "@/components/forms/EnquiryForm/NewsletterForm";
@@ -6,6 +7,7 @@ import { Icon } from "@/components/ui/Icon/Icon";
 import { hotel, telHref } from "@/content/hotel";
 import { navLinks } from "@/content/site";
 import { rooms } from "@/content/rooms";
+import { asset } from "@/lib/assets";
 
 import styles from "./Footer.module.css";
 
@@ -17,9 +19,15 @@ export function Footer() {
       <Container>
         <div className={styles.grid}>
           <div>
-            <span className={styles.brandName}>{hotel.shortName}</span>
+            <Image
+              className={styles.logo}
+              src={asset("/img/logo-white.png")}
+              alt={hotel.name}
+              width={900}
+              height={502}
+            />
             <p className={styles.blurb}>
-              An eight-room hotel on the hillside above Ella, in Sri
+              A four-room hotel on the hillside above Ella, in Sri
               Lanka&apos;s hill country.
             </p>
             <address className={styles.address}>

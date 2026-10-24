@@ -54,6 +54,21 @@
   margin-top: 2.2rem;
 }
 
+/* The map under the form, full width of the section. */
+.map {
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(18rem, 14rem + 14vw, 26rem);
+  border: 0;
+}
+
 /* Holds the enquiry form's space while it resolves the query string. */
 .formFallback {
   background: var(--bone);

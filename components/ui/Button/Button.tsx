@@ -49,10 +49,14 @@ export function ButtonLink({ href, ...props }: CommonProps & { href: string }) {
 /** Renders a <button>. Use for actions. */
 export function Button({
   type = "button",
+  onClick,
   ...props
-}: CommonProps & { type?: "button" | "submit" }) {
+}: CommonProps & {
+  type?: "button" | "submit";
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}) {
   return (
-    <button type={type} className={classesFor(props)}>
+    <button type={type} className={classesFor(props)} onClick={onClick}>
       {props.children}
     </button>
   );

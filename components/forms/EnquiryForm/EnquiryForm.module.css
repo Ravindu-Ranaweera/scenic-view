@@ -57,7 +57,7 @@
 }
 
 .input::placeholder {
-  color: rgba(118, 125, 135, 0.6);
+  color: rgba(85, 125, 133, 0.6);
 }
 
 .input:hover {

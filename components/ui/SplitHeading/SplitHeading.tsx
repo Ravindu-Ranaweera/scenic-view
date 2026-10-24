@@ -50,28 +50,38 @@ export function SplitHeading({
     return () => observer.disconnect();
   }, []);
 
-  const words = text.split(" ");
+  /* A "\n" in the text forces a line break; words keep one running
+     stagger across all lines. */
+  const rows = text.split("\n").map((row) => row.split(" "));
   const classes = [styles.heading, armed && !shown ? "" : styles.in, className]
     .filter(Boolean)
     .join(" ");
 
+  let wordIndex = 0;
+
   return (
-    <Tag ref={ref} className={classes} aria-label={text}>
-      {words.map((word, index) => (
-        <span key={`${word}-${index}`} aria-hidden="true">
-          <span className={styles.line}>
-            <span
-              className={styles.word}
-              style={
-                {
-                  "--word-delay": `${startDelay + index * step}ms`,
-                } as React.CSSProperties
-              }
-            >
-              {word}
-            </span>
-          </span>
-          {index < words.length - 1 && <span className={styles.space} />}
+    <Tag ref={ref} className={classes} aria-label={text.replace(/\n/g, " ")}>
+      {rows.map((words, rowIndex) => (
+        <span key={rowIndex} className={styles.row} aria-hidden="true">
+          {words.map((word, index) => {
+            const delay = startDelay + wordIndex * step;
+            wordIndex += 1;
+            return (
+              <span key={`${word}-${index}`}>
+                <span className={styles.line}>
+                  <span
+                    className={styles.word}
+                    style={
+                      { "--word-delay": `${delay}ms` } as React.CSSProperties
+                    }
+                  >
+                    {word}
+                  </span>
+                </span>
+                {index < words.length - 1 && <span className={styles.space} />}
+              </span>
+            );
+          })}
         </span>
       ))}
     </Tag>

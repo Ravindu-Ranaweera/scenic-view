@@ -9,7 +9,6 @@
 .head p {
   margin: 0;
 }
-
 @media (max-width: 767px) {
   .head {
     grid-template-columns: 1fr;

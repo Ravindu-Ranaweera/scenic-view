@@ -3,38 +3,38 @@
    Everything component-specific lives in a .module.css
    beside its component.
 
-   Palette: night + champagne gold + ivory, with a muted
-   ember held back as a tertiary so the crimson in the room
-   photographs sits inside the scheme rather than fighting it.
+   Palette: deep ocean teal + golden sunset + warm off-white,
+   matched to the live site (scenicviewella.vercel.app), with
+   coral held back as a tertiary accent.
    ========================================================= */
 
 :root {
   /* --- surface --- */
-  --night: #0e1114;
-  --espresso: #15181c;
-  --char: #1c2025;
-  --slate-deep: #272c33;
+  --night: #0e4f5b;
+  --espresso: #125965;
+  --char: #176370;
+  --slate-deep: #2a7280;
 
   /* --- accent --- */
-  --gold: #bfa06a;
-  --gold-lt: #e3cfa3;
-  --gold-dk: #9a7f4e;
-  --ember: #a8372f;
+  --gold: #d6a25e;
+  --gold-lt: #ecc795;
+  --gold-dk: #b9854a;
+  --ember: #ff8a65;
 
   /* --- light --- */
-  --ivory: #f7f4ee;
-  --sand: #ece4d6;
-  --bone: #fffdf9;
+  --ivory: #faf9f6;
+  --sand: #f3e8d5;
+  --bone: #fffefb;
 
   /* --- text --- */
-  --ink: #14171a;
-  --smoke: #767d87;
-  --smoke-lt: rgba(247, 244, 238, 0.62);
+  --ink: #0c3a43;
+  --smoke: #557d85;
+  --smoke-lt: rgba(250, 249, 246, 0.62);
 
   /* --- lines --- */
-  --hair: rgba(20, 23, 26, 0.1);
-  --hair-light: rgba(247, 244, 238, 0.14);
-  --hair-gold: rgba(191, 160, 106, 0.38);
+  --hair: rgba(14, 79, 91, 0.12);
+  --hair-light: rgba(250, 249, 246, 0.16);
+  --hair-gold: rgba(214, 162, 94, 0.38);
 
   --serif: var(--font-cormorant), "Times New Roman", serif;
   --sans: var(--font-inter), system-ui, -apple-system, sans-serif;
@@ -48,12 +48,12 @@
   --fs-micro: 0.68rem;
 
   /* --- rhythm --- */
-  --space-section: clamp(5rem, 3rem + 7vw, 10rem);
+  --space-section: clamp(3.5rem, 2.5rem + 3.5vw, 6rem);
   --radius: 2px;
   --radius-lg: 4px;
 
-  --shadow-soft: 0 24px 70px -28px rgba(14, 17, 20, 0.3);
-  --shadow-lift: 0 40px 90px -36px rgba(14, 17, 20, 0.45);
+  --shadow-soft: 0 24px 70px -28px rgba(14, 79, 91, 0.3);
+  --shadow-lift: 0 40px 90px -36px rgba(14, 79, 91, 0.45);
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

@@ -1,5 +1,4 @@
 import { About } from "@/components/home/About/About";
-import { AvailabilityBar } from "@/components/home/AvailabilityBar/AvailabilityBar";
 import { Contact } from "@/components/home/Contact/Contact";
 import { Facilities } from "@/components/home/Facilities/Facilities";
 import { Gallery } from "@/components/home/Gallery/Gallery";
@@ -39,7 +38,6 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
-      <AvailabilityBar />
       <About />
       <RoomGrid />
       <Facilities />
