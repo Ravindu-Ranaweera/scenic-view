@@ -57,15 +57,18 @@ export function SplitHeading({
     .filter(Boolean)
     .join(" ");
 
-  let wordIndex = 0;
+  /* Words keep one running stagger across all lines, so each row needs
+     to know how many words came before it. */
+  const rowOffsets = rows.map((_, rowIndex) =>
+    rows.slice(0, rowIndex).reduce((sum, row) => sum + row.length, 0),
+  );
 
   return (
     <Tag ref={ref} className={classes} aria-label={text.replace(/\n/g, " ")}>
       {rows.map((words, rowIndex) => (
         <span key={rowIndex} className={styles.row} aria-hidden="true">
           {words.map((word, index) => {
-            const delay = startDelay + wordIndex * step;
-            wordIndex += 1;
+            const delay = startDelay + (rowOffsets[rowIndex] + index) * step;
             return (
               <span key={`${word}-${index}`}>
                 <span className={styles.line}>
