@@ -1,14 +1,20 @@
 import Image from "next/image";
 
-import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { Section } from "@/components/ui/Section/Section";
 import { SectionHead } from "@/components/ui/SectionHead/SectionHead";
 import { getDict } from "@/content/i18n";
-import { galleryTiles } from "@/content/site";
 import { asset } from "@/lib/assets";
 import type { Locale } from "@/lib/i18n";
 
 import styles from "./Gallery.module.css";
+
+/** Three marquee rows, five photos each. The middle row runs the other
+ *  way. Order within a row is just a pleasant mix of wide and tall. */
+const rows = [
+  ["gal-01", "gal-02", "gal-11", "gal-04", "gal-07"],
+  ["gal-03", "gal-12", "gal-05", "gal-08", "gal-13"],
+  ["gal-09", "gal-14", "gal-06", "gal-10", "gal-15"],
+];
 
 export function Gallery({ locale = "en" }: { locale?: Locale }) {
   const t = getDict(locale);
@@ -17,25 +23,39 @@ export function Gallery({ locale = "en" }: { locale?: Locale }) {
     <Section id="gallery" tone="mist">
       <SectionHead eyebrow={t.gallery.eyebrow} title={t.gallery.heading} centered />
 
-      <Reveal>
-        <div className={styles.grid}>
-          {galleryTiles.map((tile) => (
-            <div
-              key={tile.src}
-              className={styles.tile}
-              style={{ gridArea: tile.area }}
-            >
-              <Image
-                src={asset(`/img/${tile.src}.jpg`)}
-                alt={tile.alt}
-                width={900}
-                height={700}
-              />
-              <span className={styles.caption}>{tile.alt}</span>
-            </div>
-          ))}
-        </div>
-      </Reveal>
+      <div className={styles.tickers}>
+        {rows.map((row, rowIndex) => (
+          <div
+            key={rowIndex}
+            className={
+              rowIndex === 1
+                ? `${styles.ticker} ${styles.reverse}`
+                : styles.ticker
+            }
+          >
+            {/* The row twice over: the animation slides one row-width,
+                so the second copy makes the loop seamless. */}
+            {[0, 1].map((copy) => (
+              <div
+                key={copy}
+                className={styles.track}
+                aria-hidden={copy === 1}
+              >
+                {row.map((src) => (
+                  <div key={src} className={styles.tile}>
+                    <Image
+                      src={asset(`/img/gallery/${src}.jpg`)}
+                      alt=""
+                      width={640}
+                      height={448}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </Section>
   );
 }

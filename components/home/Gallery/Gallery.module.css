@@ -1,93 +1,77 @@
-/* Explicit areas rather than span + auto-placement: a wide tile that
-   cannot fit the remaining columns gets pushed down and leaves a hole.
-   Nine tiles filling a 4x3 grid exactly. */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, clamp(150px, 11vw, 220px));
-  grid-template-areas:
-    "a b b c"
-    "a d e f"
-    "g g h i";
-  gap: clamp(0.5rem, 0.3rem + 0.6vw, 0.9rem);
+/* Lightfall-style gallery: full-bleed rows of photographs that slide
+   sideways on their own, the middle row running the opposite way.
+   Pure CSS animation, each row's content duplicated once so the loop
+   has no seam. */
+
+.tickers {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.7rem, 0.5rem + 0.8vw, 1.1rem);
+  /* Break out of the content container to the viewport edges. */
+  margin-inline: calc((100vw - 100%) / -2);
+  overflow: hidden;
 }
 
+.ticker {
+  display: flex;
+  width: max-content;
+  animation: slide 52s linear infinite;
+}
+
+.ticker.reverse {
+  animation-direction: reverse;
+}
+
+.tickers:hover .ticker {
+  animation-play-state: paused;
+}
+
+.track {
+  display: flex;
+  gap: clamp(0.7rem, 0.5rem + 0.8vw, 1.1rem);
+  padding-right: clamp(0.7rem, 0.5rem + 0.8vw, 1.1rem);
+}
+
+/* One photograph: the reference uses a uniform wide tile with soft
+   rounded corners, so every image crops to the same shape. */
 .tile {
-  position: relative;
+  flex: 0 0 auto;
+  height: clamp(10rem, 7rem + 12vw, 15rem);
+  aspect-ratio: 10 / 7;
   overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--sand);
+  border-radius: 16px;
 }
 
 .tile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition:
-    transform 1.3s var(--ease-out-expo),
-    filter 0.7s var(--ease);
+  transition: transform 1.2s var(--ease-out-expo);
 }
 
 .tile:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
-/* A gold-tinted veil and the caption rise together on hover. */
-.tile::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 40%,
-    rgba(14, 79, 91, 0.78) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.6s var(--ease);
-}
-
-.tile:hover::after {
-  opacity: 1;
-}
-
-.caption {
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  bottom: 0.9rem;
-  z-index: 2;
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ivory);
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.55s var(--ease),
-    transform 0.6s var(--ease-out-expo);
-}
-
-.tile:hover .caption {
-  opacity: 1;
-  transform: none;
-}
-
-@media (hover: none) {
-  .tile::after,
-  .caption {
-    opacity: 1;
-    transform: none;
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* One copy's width: the second copy is already in place. */
+    transform: translateX(-50%);
   }
 }
 
-@media (max-width: 991px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: none;
-    grid-template-areas: none;
-    grid-auto-rows: clamp(140px, 34vw, 190px);
+/* No motion for people who asked for none: the rows become one
+   scrollable strip each. */
+@media (prefers-reduced-motion: reduce) {
+  .ticker {
+    animation: none;
+    width: auto;
+    overflow-x: auto;
   }
-  .tile {
-    grid-area: auto !important;
+  .track[aria-hidden="true"] {
+    display: none;
   }
 }
