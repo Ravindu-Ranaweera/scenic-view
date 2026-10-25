@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ButtonLink } from "@/components/ui/Button/Button";
 import { Container } from "@/components/ui/Container/Container";
@@ -11,14 +11,16 @@ import { Icon } from "@/components/ui/Icon/Icon";
 import { getDict } from "@/content/i18n";
 import { bookingUrl, hotel } from "@/content/hotel";
 import { asset } from "@/lib/assets";
-import {
-  localeFromPathname,
-  localeHref,
-  locales,
-  switchLocalePath,
-} from "@/lib/i18n";
+import { localeFromPathname, localeHref, switchLocalePath } from "@/lib/i18n";
 
 import styles from "./Header.module.css";
+
+/** The gb flag stands in for English. */
+const LANGUAGES = [
+  { code: "en", label: "English", flag: "gb" },
+  { code: "ru", label: "Русский", flag: "ru" },
+  { code: "de", label: "Deutsch", flag: "de" },
+] as const;
 
 export function Header() {
   const pathname = usePathname();
@@ -29,6 +31,25 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  /* The dropdown closes on a click elsewhere or on Escape. */
+  useEffect(() => {
+    if (!langOpen) return;
+    const onDown = (event: MouseEvent) => {
+      if (!langRef.current?.contains(event.target as Node)) setLangOpen(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setLangOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [langOpen]);
 
   useEffect(() => {
     let last = window.scrollY;
@@ -99,22 +120,59 @@ export function Header() {
           </ul>
 
           {/* Outside the collapsible menu, so it is always in the bar. */}
-          <nav className={styles.langs} aria-label="Language">
-            {locales.map((code) => (
-              <Link
-                key={code}
-                href={switchLocalePath(pathname, code)}
-                className={
-                  code === locale
-                    ? `${styles.lang} ${styles.langActive}`
-                    : styles.lang
-                }
-                onClick={() => setOpen(false)}
-              >
-                {code.toUpperCase()}
-              </Link>
-            ))}
-          </nav>
+          <div className={styles.langs} ref={langRef}>
+            <button
+              type="button"
+              className={styles.langBtn}
+              aria-haspopup="menu"
+              aria-expanded={langOpen}
+              aria-label="Language"
+              onClick={() => setLangOpen((v) => !v)}
+            >
+              <Image
+                className={styles.flag}
+                src={asset(
+                  `/img/flags/${LANGUAGES.find((l) => l.code === locale)!.flag}.svg`,
+                )}
+                alt=""
+                width={20}
+                height={14}
+              />
+              {locale.toUpperCase()}
+              <Icon name="fa-solid fa-chevron-down" />
+            </button>
+
+            {langOpen && (
+              <ul className={styles.langMenu} role="menu">
+                {LANGUAGES.map((lang) => (
+                  <li key={lang.code} role="none">
+                    <Link
+                      role="menuitem"
+                      href={switchLocalePath(pathname, lang.code)}
+                      className={
+                        lang.code === locale
+                          ? `${styles.langItem} ${styles.langActive}`
+                          : styles.langItem
+                      }
+                      onClick={() => {
+                        setLangOpen(false);
+                        setOpen(false);
+                      }}
+                    >
+                      <Image
+                        className={styles.flag}
+                        src={asset(`/img/flags/${lang.flag}.svg`)}
+                        alt=""
+                        width={20}
+                        height={14}
+                      />
+                      {lang.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
           <button
             type="button"
