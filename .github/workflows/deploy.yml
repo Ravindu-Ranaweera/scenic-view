@@ -33,6 +33,9 @@ jobs:
 
       - name: Lint and typecheck
         run: |
+          # tsc needs the generated route types (PageProps, LayoutProps)
+          # that only exist after a build or an explicit typegen.
+          npx next typegen
           npx tsc --noEmit
           npx eslint .
 
