@@ -42,10 +42,10 @@ export function About({ locale = "en" }: { locale?: Locale }) {
 
             <Reveal variant="mask" className={styles.photo}>
               <Image
-                src={asset("/img/view-03.jpg")}
-                alt={`${hotel.name} seen from the hillside`}
-                width={720}
-                height={1152}
+                src={asset("/img/about-hotel.jpg")}
+                alt={`${hotel.name} seen from the air at dawn`}
+                width={1800}
+                height={1057}
               />
             </Reveal>
 

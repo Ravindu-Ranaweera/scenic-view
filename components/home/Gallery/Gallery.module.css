@@ -40,6 +40,10 @@
   aspect-ratio: 10 / 7;
   overflow: hidden;
   border-radius: 16px;
+  padding: 0;
+  border: 0;
+  background: var(--slate-deep);
+  cursor: pointer;
 }
 
 .tile img {
@@ -60,6 +64,104 @@
   to {
     /* One copy's width: the second copy is already in place. */
     transform: translateX(-50%);
+  }
+}
+
+/* --- the popup: one photograph in an ivory frame --- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.6rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(8, 44, 51, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* The frame: an ivory mat around the photograph, like a print. */
+.frame {
+  margin: 0;
+  padding: clamp(0.6rem, 1.4vw, 1.1rem);
+  background: var(--ivory);
+  border-radius: 4px;
+  box-shadow: var(--shadow-lift);
+  max-width: min(74vw, 64rem);
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 72vh;
+  object-fit: contain;
+}
+
+.counter {
+  padding-top: 0.55rem;
+  text-align: center;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  color: var(--smoke);
+  font-variant-numeric: tabular-nums;
+}
+
+.close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.3rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid rgba(250, 249, 246, 0.35);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ivory);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.3s var(--ease);
+}
+
+.close:hover {
+  background: rgba(250, 249, 246, 0.14);
+}
+
+.nav {
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(250, 249, 246, 0.35);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ivory);
+  cursor: pointer;
+  transition: background 0.3s var(--ease);
+}
+
+.nav:hover {
+  background: rgba(250, 249, 246, 0.14);
+}
+
+@media (max-width: 640px) {
+  .nav {
+    position: absolute;
+    bottom: 1.2rem;
+  }
+  .prev {
+    left: 1.2rem;
+  }
+  .next {
+    right: 1.2rem;
+  }
+  .frame {
+    max-width: 92vw;
   }
 }
 

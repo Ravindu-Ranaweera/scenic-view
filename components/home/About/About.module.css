@@ -89,7 +89,9 @@
   height: auto;
   aspect-ratio: 5 / 8;
   object-fit: cover;
-  object-position: 62% 50%;
+  /* The drone still is landscape with the building on its left, so the
+     portrait capsule crops to that side. */
+  object-position: 18% 50%;
   transition: transform 1.8s var(--ease-out-expo);
 }
 
