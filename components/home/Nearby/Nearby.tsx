@@ -4,31 +4,32 @@ import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { Section } from "@/components/ui/Section/Section";
 import { SplitHeading } from "@/components/ui/SplitHeading/SplitHeading";
-import { nearby, nearbyCollage } from "@/content/site";
+import { getDict, getNearby } from "@/content/i18n";
+import { nearbyCollage } from "@/content/site";
 import { asset } from "@/lib/assets";
+import type { Locale } from "@/lib/i18n";
 
 import styles from "./Nearby.module.css";
 
-export function Nearby() {
+export function Nearby({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale);
+
   return (
     <Section id="nearby" tone="dark" className={styles.section}>
       <div className={styles.grid}>
         <div className={styles.copy}>
           <Reveal variant="up">
-            <Eyebrow onDark>Around Ella</Eyebrow>
+            <Eyebrow onDark>{t.nearby.eyebrow}</Eyebrow>
           </Reveal>
 
-          <SplitHeading text="Everything people come to Ella for, from the door." />
+          <SplitHeading text={t.nearby.heading} />
 
           <Reveal variant="up" delay={140}>
-            <p className={styles.intro}>
-              Tell us the night before and the tuk-tuk, the guide or the train
-              tickets are arranged by breakfast.
-            </p>
+            <p className={styles.intro}>{t.nearby.intro}</p>
           </Reveal>
 
           <ul className={styles.list}>
-            {nearby.map((place, index) => (
+            {getNearby(locale).map((place, index) => (
               <Reveal
                 key={place.name}
                 as="li"

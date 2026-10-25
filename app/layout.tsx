@@ -36,6 +36,25 @@ const inter = localFont({
   display: "swap",
 });
 
+/* Cyrillic subsets for the Russian pages. The latin files above hold no
+   Cyrillic glyphs, so these sit next in the font-family chain and the
+   browser falls through to them per glyph. */
+const cormorantCyr = localFont({
+  src: "./fonts/cormorant-garamond-variable-cyrillic.woff2",
+  weight: "400 600",
+  style: "normal",
+  variable: "--font-cormorant-cyr",
+  display: "swap",
+});
+
+const interCyr = localFont({
+  src: "./fonts/inter-variable-cyrillic.woff2",
+  weight: "300 500",
+  style: "normal",
+  variable: "--font-inter-cyr",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -57,7 +76,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${inter.variable} ${cormorantCyr.variable} ${interCyr.variable}`}
+    >
       <head>
         {/* Font Awesome Free. Served from a CDN so the static export stays small. */}
         <link

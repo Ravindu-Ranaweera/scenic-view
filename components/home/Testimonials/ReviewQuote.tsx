@@ -7,7 +7,15 @@ import styles from "./Testimonials.module.css";
 /** Reviews longer than this clamp to a few lines behind a Read more. */
 const CLAMP_AT = 190;
 
-export function ReviewQuote({ quote }: { quote: string }) {
+export function ReviewQuote({
+  quote,
+  readMore = "Read more",
+  readLess = "Read less",
+}: {
+  quote: string;
+  readMore?: string;
+  readLess?: string;
+}) {
   const long = quote.length > CLAMP_AT;
   const [open, setOpen] = useState(false);
 
@@ -25,7 +33,7 @@ export function ReviewQuote({ quote }: { quote: string }) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
         >
-          {open ? "Read less" : "Read more"}
+          {open ? readLess : readMore}
         </button>
       )}
     </div>

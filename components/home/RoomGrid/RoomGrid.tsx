@@ -3,33 +3,28 @@ import { RoomCard } from "@/components/shared/RoomCard/RoomCard";
 import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { Section } from "@/components/ui/Section/Section";
-import { rooms } from "@/content/rooms";
+import { getDict, getRooms } from "@/content/i18n";
+import type { Locale } from "@/lib/i18n";
 
 import styles from "./RoomGrid.module.css";
 
-export function RoomGrid() {
+export function RoomGrid({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale);
+
   return (
     <Section id="rooms" tone="mist">
       <div className={styles.head}>
         <div>
-          <Eyebrow>Rooms</Eyebrow>
-          <h2>
-            {["No", "One", "Two", "Three", "Four", "Five"][rooms.length] ??
-              rooms.length}{" "}
-            rooms. Every one facing the mountains.
-          </h2>
+          <Eyebrow>{t.roomsSection.eyebrow}</Eyebrow>
+          <h2>{t.roomsSection.heading}</h2>
         </div>
-        <p>
-          Every room has a mountain view, a private balcony or terrace, a hot
-          shower, a television and free Wi-Fi. Breakfast is included with
-          every room.
-        </p>
+        <p>{t.roomsSection.blurb}</p>
       </div>
 
-      <Rail label="Rooms" perView={2}>
-        {rooms.map((room, index) => (
+      <Rail label={t.roomsSection.eyebrow} perView={2}>
+        {getRooms(locale).map((room, index) => (
           <Reveal key={room.slug} variant="up" delay={(index % 2) * 90}>
-            <RoomCard room={room} />
+            <RoomCard room={room} locale={locale} />
           </Reveal>
         ))}
       </Rail>

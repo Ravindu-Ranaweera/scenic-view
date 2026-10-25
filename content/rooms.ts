@@ -56,7 +56,7 @@ export const rooms: Room[] = [
     outlook: "Mountain view",
     outlookIcon: "fa-solid fa-mountain-sun",
     size: "28 m²",
-    images: ["deluxe-03", "deluxe-04"],
+    images: ["deluxe-03", "deluxe-07", "deluxe-06", "deluxe-04"],
     intro:
       "The room people write to us about afterwards. A king bed, a minibar, and full-height doors onto a balcony with two chairs and a table, looking straight down the valley.",
     detail:

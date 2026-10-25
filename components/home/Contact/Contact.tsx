@@ -6,28 +6,32 @@ import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { Section } from "@/components/ui/Section/Section";
 import { SplitHeading } from "@/components/ui/SplitHeading/SplitHeading";
+import { getDict } from "@/content/i18n";
 import { hotel, telHref } from "@/content/hotel";
+import type { Locale } from "@/lib/i18n";
 
 import styles from "./Contact.module.css";
 
-export function Contact() {
+export function Contact({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale);
+  const checkTimes = t.contact.fromUntilFmt
+    .replace("{in}", hotel.checkIn)
+    .replace("{out}", hotel.checkOut);
+
   return (
     <Section id="contact">
       <div className={styles.grid}>
         <div>
-          <Eyebrow>Reservations</Eyebrow>
-          <SplitHeading text="Book with us directly." />
-          <p>
-            Booking through us costs less than the agency sites, and you are
-            writing to the people who will meet you at the door.
-          </p>
+          <Eyebrow>{t.contact.eyebrow}</Eyebrow>
+          <SplitHeading text={t.contact.heading} />
+          <p>{t.contact.blurb}</p>
 
           {/* TO REPLACE: every value here comes from content/hotel.ts */}
           <div className={styles.lines}>
             <div className={styles.line}>
               <Icon name="fa-solid fa-location-dot" />
               <div>
-                <strong>Address</strong>
+                <strong>{t.contact.address}</strong>
                 <span>{hotel.address}</span>
               </div>
             </div>
@@ -35,7 +39,7 @@ export function Contact() {
             <div className={styles.line}>
               <Icon name="fa-solid fa-phone" />
               <div>
-                <strong>Telephone</strong>
+                <strong>{t.contact.telephone}</strong>
                 <a href={telHref(hotel.phone)}>{hotel.phone}</a>
               </div>
             </div>
@@ -43,7 +47,7 @@ export function Contact() {
             <div className={styles.line}>
               <Icon name="fa-solid fa-envelope" />
               <div>
-                <strong>Email</strong>
+                <strong>{t.contact.email}</strong>
                 <a href={`mailto:${hotel.email}`}>{hotel.email}</a>
               </div>
             </div>
@@ -51,27 +55,27 @@ export function Contact() {
             <div className={styles.line}>
               <Icon name="fa-solid fa-clock" />
               <div>
-                <strong>Check in / out</strong>
-                <span>
-                  From {hotel.checkIn} &middot; until {hotel.checkOut}
-                </span>
+                <strong>{t.contact.checkInOut}</strong>
+                <span>{checkTimes}</span>
               </div>
             </div>
           </div>
 
-          <WhatsAppButton className={styles.whatsapp} />
+          <WhatsAppButton className={styles.whatsapp}>
+            {t.whatsappMessage}
+          </WhatsAppButton>
         </div>
 
         {/* EnquiryForm reads the query string during render, which needs a
             boundary so the rest of the page can still prerender statically. */}
         <Suspense fallback={<div className={styles.formFallback} />}>
-          <EnquiryForm />
+          <EnquiryForm locale={locale} />
         </Suspense>
       </div>
 
       <div className={styles.map}>
         <iframe
-          title={`Map showing ${hotel.name}`}
+          title={t.contact.mapTitle}
           src={`https://www.google.com/maps?q=${encodeURIComponent(
             `${hotel.name}, ${hotel.address}`,
           )}&output=embed`}

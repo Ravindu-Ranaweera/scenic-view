@@ -8,15 +8,23 @@ import { useEffect, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button/Button";
 import { Container } from "@/components/ui/Container/Container";
 import { Icon } from "@/components/ui/Icon/Icon";
+import { getDict } from "@/content/i18n";
 import { bookingUrl, hotel } from "@/content/hotel";
-import { navLinks } from "@/content/site";
 import { asset } from "@/lib/assets";
+import {
+  localeFromPathname,
+  localeHref,
+  locales,
+  switchLocalePath,
+} from "@/lib/i18n";
 
 import styles from "./Header.module.css";
 
 export function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const locale = localeFromPathname(pathname);
+  const t = getDict(locale);
+  const isHome = pathname === "/" || pathname === `/${locale}`;
 
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -54,7 +62,7 @@ export function Header() {
     <header className={classes}>
       <Container>
         <div className={styles.bar}>
-          <Link href="/" className={styles.brand}>
+          <Link href={localeHref(locale, "/")} className={styles.brand}>
             <Image
               className={styles.logo}
               src={asset("/img/logo-white.png")}
@@ -64,6 +72,49 @@ export function Header() {
               priority
             />
           </Link>
+
+          <ul
+            id="primary-nav"
+            className={open ? styles.nav : `${styles.nav} ${styles.navClosed}`}
+          >
+            {t.nav.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={
+                    link.href === "/journal"
+                      ? link.href
+                      : localeHref(locale, link.href)
+                  }
+                  className={styles.link}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+
+            <li className={styles.cta}>
+              <ButtonLink href={bookingUrl}>{t.bookNow}</ButtonLink>
+            </li>
+          </ul>
+
+          {/* Outside the collapsible menu, so it is always in the bar. */}
+          <nav className={styles.langs} aria-label="Language">
+            {locales.map((code) => (
+              <Link
+                key={code}
+                href={switchLocalePath(pathname, code)}
+                className={
+                  code === locale
+                    ? `${styles.lang} ${styles.langActive}`
+                    : styles.lang
+                }
+                onClick={() => setOpen(false)}
+              >
+                {code.toUpperCase()}
+              </Link>
+            ))}
+          </nav>
 
           <button
             type="button"
@@ -75,26 +126,6 @@ export function Header() {
           >
             <Icon name={open ? "fa-solid fa-xmark" : "fa-solid fa-bars"} />
           </button>
-
-          <ul
-            id="primary-nav"
-            className={open ? styles.nav : `${styles.nav} ${styles.navClosed}`}
-          >
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={styles.link}
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-            <li className={styles.cta}>
-              <ButtonLink href={bookingUrl}>Book Now</ButtonLink>
-            </li>
-          </ul>
         </div>
       </Container>
     </header>

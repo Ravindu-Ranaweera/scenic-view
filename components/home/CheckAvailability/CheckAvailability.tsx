@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { Button } from "@/components/ui/Button/Button";
+import { getDict } from "@/content/i18n";
 import { hotel } from "@/content/hotel";
+import { localeHref, type Locale } from "@/lib/i18n";
 import { useDateRange } from "@/lib/useDateRange";
 
 import styles from "./CheckAvailability.module.css";
@@ -17,8 +19,9 @@ import styles from "./CheckAvailability.module.css";
  * the popup collects the dates and party size and carries them down
  * to the enquiry form.
  */
-export function CheckAvailability() {
+export function CheckAvailability({ locale = "en" }: { locale?: Locale }) {
   const router = useRouter();
+  const t = getDict(locale).popup;
   const dates = useDateRange();
   const [open, setOpen] = useState(false);
   const [adults, setAdults] = useState("2");
@@ -47,13 +50,13 @@ export function CheckAvailability() {
       children,
     });
     setOpen(false);
-    router.push(`/?${params}#contact`);
+    router.push(`${localeHref(locale, "/")}?${params}#contact`);
   };
 
   return (
     <>
       <Button className={styles.trigger} onClick={() => setOpen(true)}>
-        Check Availability
+        {t.submit}
       </Button>
 
       {/* Portalled to <body>: the hero clips overflow and its Reveal
@@ -82,14 +85,14 @@ export function CheckAvailability() {
               ×
             </button>
 
-            <p className={styles.eyebrow}>Plan your stay</p>
+            <p className={styles.eyebrow}>{t.eyebrow}</p>
             <h3 id="caTitle" className={styles.title}>
-              Check-in details
+              {t.title}
             </h3>
 
             <form className={styles.grid} onSubmit={handleSubmit}>
               <div className={styles.field}>
-                <label htmlFor="caCheckin">Check in</label>
+                <label htmlFor="caCheckin">{t.checkIn}</label>
                 <input
                   id="caCheckin"
                   type="date"
@@ -102,7 +105,7 @@ export function CheckAvailability() {
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="caCheckout">Check out</label>
+                <label htmlFor="caCheckout">{t.checkOut}</label>
                 <input
                   id="caCheckout"
                   type="date"
@@ -115,7 +118,7 @@ export function CheckAvailability() {
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="caAdults">Adults</label>
+                <label htmlFor="caAdults">{t.adults}</label>
                 <select
                   id="caAdults"
                   className={styles.input}
@@ -129,7 +132,7 @@ export function CheckAvailability() {
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="caChildren">Children</label>
+                <label htmlFor="caChildren">{t.children}</label>
                 <select
                   id="caChildren"
                   className={styles.input}
@@ -144,14 +147,13 @@ export function CheckAvailability() {
 
               <div className={styles.submit}>
                 <Button type="submit" block>
-                  Check Availability
+                  {t.submit}
                 </Button>
               </div>
             </form>
 
             <p className={styles.note}>
-              We hold only {hotel.roomCount} rooms, so every booking is
-              confirmed by hand, usually within the hour.
+              {t.noteFmt.replace("{n}", String(hotel.roomCount))}
             </p>
           </div>
         </div>,

@@ -2,21 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Icon } from "@/components/ui/Icon/Icon";
+import { getDict } from "@/content/i18n";
 import type { Room } from "@/lib/types";
+import { localeHref, type Locale } from "@/lib/i18n";
 
 import styles from "./RoomCard.module.css";
 import { asset } from "@/lib/assets";
 
 export function RoomCard({
   room,
+  locale = "en",
   compact = false,
 }: {
   room: Room;
-  /** Kept for callers that still pass it. No longer rendered. */
-  index?: number;
+  locale?: Locale;
   compact?: boolean;
 }) {
-  const href = `/rooms/${room.slug}`;
+  const t = getDict(locale).roomCard;
+  const href = localeHref(locale, `/rooms/${room.slug}`);
 
   return (
     <article
@@ -30,7 +33,7 @@ export function RoomCard({
           height={640}
         />
         <span className={styles.view} aria-hidden="true">
-          View
+          {t.view}
         </span>
       </div>
 
@@ -46,13 +49,11 @@ export function RoomCard({
 
         <dl className={styles.facts}>
           <div>
-            <dt>Occupancy</dt>
-            <dd>
-              {room.guests} {room.guests === 1 ? "Person" : "Persons"}
-            </dd>
+            <dt>{t.occupancy}</dt>
+            <dd>{t.personsFmt.replace("{n}", String(room.guests))}</dd>
           </div>
           <div>
-            <dt>Bed Type</dt>
+            <dt>{t.bedType}</dt>
             <dd>{room.beds}</dd>
           </div>
         </dl>

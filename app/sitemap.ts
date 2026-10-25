@@ -19,12 +19,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...["ru", "de"].map((locale) => ({
+      url: `${siteUrl}/${locale}/`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
     ...rooms.map((room) => ({
       url: `${siteUrl}/rooms/${room.slug}/`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
+    ...["ru", "de"].flatMap((locale) =>
+      rooms.map((room) => ({
+        url: `${siteUrl}/${locale}/rooms/${room.slug}/`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+      })),
+    ),
     ...posts.map((post) => ({
       url: `${siteUrl}/journal/${post.slug}/`,
       lastModified: now,

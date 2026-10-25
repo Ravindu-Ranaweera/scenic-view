@@ -2,21 +2,24 @@ import { Icon } from "@/components/ui/Icon/Icon";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { Section } from "@/components/ui/Section/Section";
 import { SectionHead } from "@/components/ui/SectionHead/SectionHead";
-import { facilities } from "@/content/site";
+import { getDict, getFacilities } from "@/content/i18n";
+import type { Locale } from "@/lib/i18n";
 
 import styles from "./Facilities.module.css";
 
-export function Facilities() {
+export function Facilities({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale);
+
   return (
     <Section id="facilities">
       <SectionHead
-        eyebrow="Facilities"
-        title="What comes with the room."
+        eyebrow={t.facilities.eyebrow}
+        title={t.facilities.heading}
         centered
       />
 
       <div className={styles.grid}>
-        {facilities.map((facility, index) => (
+        {getFacilities(locale).map((facility, index) => (
           <Reveal
             key={facility.title}
             as="div"

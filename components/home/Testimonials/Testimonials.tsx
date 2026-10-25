@@ -5,18 +5,22 @@ import { Icon } from "@/components/ui/Icon/Icon";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { Section } from "@/components/ui/Section/Section";
 import { SectionHead } from "@/components/ui/SectionHead/SectionHead";
+import { getDict } from "@/content/i18n";
 import { testimonials } from "@/content/site";
 import { asset } from "@/lib/assets";
+import type { Locale } from "@/lib/i18n";
 
 import { ReviewQuote } from "./ReviewQuote";
 import styles from "./Testimonials.module.css";
 
-export function Testimonials() {
+export function Testimonials({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale);
+
   return (
     <Section id="reviews">
       <SectionHead
-        eyebrow="Guest Book"
-        title="What people write afterwards."
+        eyebrow={t.reviews.eyebrow}
+        title={t.reviews.heading}
         centered
       />
 
@@ -24,7 +28,7 @@ export function Testimonials() {
         <span className={styles.glyph} aria-hidden="true">
           &ldquo;
         </span>
-        <Rail label="Guest reviews" perView={3}>
+        <Rail label={t.reviews.eyebrow} perView={3}>
           {testimonials.map((item, index) => {
             const rating = item.rating ?? 5;
             const full = Math.floor(rating);
@@ -43,7 +47,11 @@ export function Testimonials() {
                     {half && <Icon name="fa-solid fa-star-half-stroke" />}
                   </div>
 
-                  <ReviewQuote quote={item.quote} />
+                  <ReviewQuote
+                    quote={item.quote}
+                    readMore={t.reviews.readMore}
+                    readLess={t.reviews.readLess}
+                  />
 
                   <figcaption className={styles.author}>
                     <span className={styles.avatar}>

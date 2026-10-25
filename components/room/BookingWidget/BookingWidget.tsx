@@ -5,8 +5,9 @@ import { useState } from "react";
 
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton/WhatsAppButton";
 import { Button } from "@/components/ui/Button/Button";
+import { getDict } from "@/content/i18n";
 import { hotel, telHref } from "@/content/hotel";
-import { stayExtras } from "@/content/rooms";
+import { localeHref, type Locale } from "@/lib/i18n";
 import type { Room } from "@/lib/types";
 import { useDateRange } from "@/lib/useDateRange";
 
@@ -17,8 +18,15 @@ import styles from "./BookingWidget.module.css";
  * It carries the dates, party size and chosen extras to the enquiry form
  * on the home page, which pre-fills itself from the query string.
  */
-export function BookingWidget({ room }: { room: Room }) {
+export function BookingWidget({
+  room,
+  locale = "en",
+}: {
+  room: Room;
+  locale?: Locale;
+}) {
   const router = useRouter();
+  const t = getDict(locale).widget;
   const dates = useDateRange();
   const [adults, setAdults] = useState("2");
   const [children, setChildren] = useState("0");
@@ -41,21 +49,19 @@ export function BookingWidget({ room }: { room: Room }) {
       children,
     });
     if (extras.length) params.set("extras", extras.join("; "));
-    router.push(`/?${params}#contact`);
+    router.push(`${localeHref(locale, "/")}?${params}#contact`);
   };
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.widget}>
         <div className={styles.rateHead}>
-          <div className={styles.per}>
-            Breakfast included &middot; we confirm every booking by hand
-          </div>
+          <div className={styles.per}>{t.topLine}</div>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="bkCheckin">Check in</label>
+            <label htmlFor="bkCheckin">{t.checkIn}</label>
             <input
               id="bkCheckin"
               type="date"
@@ -68,7 +74,7 @@ export function BookingWidget({ room }: { room: Room }) {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="bkCheckout">Check out</label>
+            <label htmlFor="bkCheckout">{t.checkOut}</label>
             <input
               id="bkCheckout"
               type="date"
@@ -81,7 +87,7 @@ export function BookingWidget({ room }: { room: Room }) {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="bkAdults">Adults</label>
+            <label htmlFor="bkAdults">{t.adults}</label>
             <select
               id="bkAdults"
               className={styles.input}
@@ -95,7 +101,7 @@ export function BookingWidget({ room }: { room: Room }) {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="bkChildren">Children</label>
+            <label htmlFor="bkChildren">{t.children}</label>
             <select
               id="bkChildren"
               className={styles.input}
@@ -109,8 +115,8 @@ export function BookingWidget({ room }: { room: Room }) {
           </div>
 
           <div className={styles.extras}>
-            <h3>Add to your stay</h3>
-            {stayExtras.map((extra, index) => {
+            <h3>{t.addToStay}</h3>
+            {t.extras.map((extra, index) => {
               const id = `extra-${index}`;
               return (
                 <div key={extra.label} className={styles.check}>
@@ -130,23 +136,19 @@ export function BookingWidget({ room }: { room: Room }) {
           </div>
 
           <Button type="submit" block>
-            Check Availability
+            {t.submit}
           </Button>
-          <p className={styles.foot}>
-            No payment now. We confirm by email first.
-          </p>
+          <p className={styles.foot}>{t.noPayment}</p>
         </form>
       </div>
 
       <div className={styles.help}>
-        <h3>Rather just ask?</h3>
-        <p>
-          We answer WhatsApp faster than anything else, usually within the hour.
-        </p>
+        <h3>{t.askHeading}</h3>
+        <p>{t.askBody}</p>
         <a className={styles.call} href={telHref(hotel.phone)}>
           {hotel.phone}
         </a>
-        <WhatsAppButton>WhatsApp us</WhatsAppButton>
+        <WhatsAppButton>{t.whatsappUs}</WhatsAppButton>
       </div>
     </div>
   );

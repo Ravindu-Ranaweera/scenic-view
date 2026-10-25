@@ -4,26 +4,29 @@ import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { Section } from "@/components/ui/Section/Section";
 import { SplitHeading } from "@/components/ui/SplitHeading/SplitHeading";
+import { getDict } from "@/content/i18n";
 import { hotel } from "@/content/hotel";
-import { aboutCopy } from "@/content/site";
 import { asset } from "@/lib/assets";
+import type { Locale } from "@/lib/i18n";
 
 import styles from "./About.module.css";
 
-export function About() {
+export function About({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale);
+
   return (
     <Section id="about" className={styles.compact}>
       <div className={styles.grid}>
         <div className={styles.copy}>
           <Reveal variant="up">
-            <Eyebrow centered>The Hotel</Eyebrow>
+            <Eyebrow centered>{t.about.eyebrow}</Eyebrow>
           </Reveal>
 
-          <SplitHeading text={aboutCopy.heading} />
+          <SplitHeading text={t.about.heading} />
 
           <Reveal variant="up" delay={160}>
             <div>
-              {aboutCopy.paragraphs.map((paragraph) => (
+              {t.about.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)} className={styles.lead}>
                   {paragraph}
                 </p>

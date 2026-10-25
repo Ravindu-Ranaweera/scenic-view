@@ -36,8 +36,10 @@
   --hair-light: rgba(250, 249, 246, 0.16);
   --hair-gold: rgba(214, 162, 94, 0.38);
 
-  --serif: var(--font-cormorant), "Times New Roman", serif;
-  --sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  /* The latin files carry no Cyrillic, so the cyrillic subsets sit next
+     in each chain and catch those glyphs on the Russian pages. */
+  --serif: var(--font-cormorant), var(--font-cormorant-cyr), "Times New Roman", serif;
+  --sans: var(--font-inter), var(--font-inter-cyr), system-ui, -apple-system, sans-serif;
 
   /* --- fluid type scale --- */
   --fs-display: clamp(3rem, 1.4rem + 6.6vw, 7.5rem);

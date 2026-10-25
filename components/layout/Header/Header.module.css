@@ -59,6 +59,8 @@
   align-items: center;
   gap: 0.25rem;
   list-style: none;
+  /* Keeps the links, the switcher and the button together on the right. */
+  margin-left: auto;
 }
 
 .link {
@@ -100,7 +102,35 @@
   margin-left: 1rem;
 }
 
-@media (max-width: 1100px) {
+/* --- the EN / RU / DE switcher --- */
+
+.langs {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex-shrink: 0;
+  padding-left: 0.9rem;
+  border-left: 1px solid rgba(250, 249, 246, 0.25);
+}
+
+.lang {
+  padding: 0.35rem 0.45rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(250, 249, 246, 0.85);
+  transition: color 0.4s var(--ease);
+}
+
+.lang:hover {
+  color: var(--ivory);
+}
+
+.langActive {
+  color: var(--gold-lt);
+}
+
+@media (max-width: 1280px) {
   .toggle {
     display: block;
   }
@@ -130,6 +160,12 @@
 
   .navClosed {
     display: none;
+  }
+
+  /* The folded menu leaves the flow, so the switcher takes over the
+     right side next to the hamburger. */
+  .langs {
+    margin-left: auto;
   }
 
   .cta {

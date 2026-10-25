@@ -1,22 +1,31 @@
 import { Icon } from "@/components/ui/Icon/Icon";
+import { getDict } from "@/content/i18n";
 import type { Room } from "@/lib/types";
+import type { Locale } from "@/lib/i18n";
 
 import styles from "./MetaGrid.module.css";
 
-export function MetaGrid({ room }: { room: Room }) {
+export function MetaGrid({
+  room,
+  locale = "en",
+}: {
+  room: Room;
+  locale?: Locale;
+}) {
+  const t = getDict(locale).roomPage;
   const boxes = [
     {
       icon: "fa-solid fa-user-group",
       value: String(room.guests),
-      label: "Guests",
+      label: t.guests,
     },
-    { icon: "fa-solid fa-bed", value: room.beds, label: "Beds" },
-    { icon: "fa-solid fa-bath", value: room.bathroom, label: "Bathroom" },
-    { icon: room.outlookIcon, value: room.outlook, label: "Outlook" },
+    { icon: "fa-solid fa-bed", value: room.beds, label: t.beds },
+    { icon: "fa-solid fa-bath", value: room.bathroom, label: t.bathroom },
+    { icon: room.outlookIcon, value: room.outlook, label: t.outlook },
     {
       icon: "fa-solid fa-up-right-and-down-left-from-center",
       value: room.size,
-      label: "Size",
+      label: t.size,
     },
   ];
 

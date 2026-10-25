@@ -4,17 +4,13 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button/Button";
-import { rooms } from "@/content/rooms";
+import { getDict, getRooms } from "@/content/i18n";
+import type { Locale } from "@/lib/i18n";
 import { useDateRange } from "@/lib/useDateRange";
 
 import styles from "./EnquiryForm.module.css";
 
 type Status = { message: string; isError: boolean };
-
-const DEFAULT_STATUS: Status = {
-  message: "We reply to every enquiry within a day, usually much sooner.",
-  isError: false,
-};
 
 /**
  * The enquiry form.
@@ -42,7 +38,8 @@ function messageFrom(params: URLSearchParams) {
   return parts.length ? `${parts.join(". ")}.` : "";
 }
 
-export function EnquiryForm() {
+export function EnquiryForm({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale).enquiry;
   const params = useSearchParams();
 
   const dates = useDateRange(
@@ -51,17 +48,17 @@ export function EnquiryForm() {
   );
   const [room, setRoom] = useState(() => params.get("room") ?? "");
   const [message, setMessage] = useState(() => messageFrom(params));
-  const [status, setStatus] = useState<Status>(DEFAULT_STATUS);
+  const [status, setStatus] = useState<Status>({
+    message: t.defaultStatus,
+    isError: false,
+  });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
 
     if (!form.checkValidity()) {
-      setStatus({
-        message: "Please fill in your name and a valid email address.",
-        isError: true,
-      });
+      setStatus({ message: t.invalid, isError: true });
       return;
     }
 
@@ -69,11 +66,7 @@ export function EnquiryForm() {
     const data = Object.fromEntries(new FormData(form).entries());
     console.log("Enquiry (not yet sent anywhere):", data);
 
-    setStatus({
-      message:
-        "Thank you. Your enquiry is noted and we will reply within a day.",
-      isError: false,
-    });
+    setStatus({ message: t.thanks, isError: false });
     form.reset();
     setRoom("");
     setMessage("");
@@ -82,15 +75,13 @@ export function EnquiryForm() {
 
   return (
     <div className={styles.card}>
-      <h3>Enquire about a stay</h3>
-      <p className={styles.cardNote}>
-        No payment now. We read every message ourselves and reply by email.
-      </p>
+      <h3>{t.heading}</h3>
+      <p className={styles.cardNote}>{t.note}</p>
 
       <form onSubmit={handleSubmit} noValidate>
         <div className={styles.grid}>
           <div className={styles.field}>
-            <label htmlFor="eqName">Your name</label>
+            <label htmlFor="eqName">{t.name}</label>
             <input
               id="eqName"
               name="name"
@@ -101,7 +92,7 @@ export function EnquiryForm() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="eqEmail">Email address</label>
+            <label htmlFor="eqEmail">{t.email}</label>
             <input
               id="eqEmail"
               name="email"
@@ -112,7 +103,7 @@ export function EnquiryForm() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="eqPhone">Phone / WhatsApp</label>
+            <label htmlFor="eqPhone">{t.phone}</label>
             <input
               id="eqPhone"
               name="phone"
@@ -122,7 +113,7 @@ export function EnquiryForm() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="eqRoom">Room of interest</label>
+            <label htmlFor="eqRoom">{t.room}</label>
             <select
               id="eqRoom"
               name="room"
@@ -130,8 +121,8 @@ export function EnquiryForm() {
               value={room}
               onChange={(event) => setRoom(event.target.value)}
             >
-              <option value="">No preference yet</option>
-              {rooms.map((r) => (
+              <option value="">{t.noPreference}</option>
+              {getRooms(locale).map((r) => (
                 <option key={r.slug} value={r.name}>
                   {r.name}
                 </option>
@@ -140,7 +131,7 @@ export function EnquiryForm() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="eqCheckin">Arriving</label>
+            <label htmlFor="eqCheckin">{t.arriving}</label>
             <input
               id="eqCheckin"
               name="checkin"
@@ -153,7 +144,7 @@ export function EnquiryForm() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="eqCheckout">Leaving</label>
+            <label htmlFor="eqCheckout">{t.leaving}</label>
             <input
               id="eqCheckout"
               name="checkout"
@@ -166,13 +157,13 @@ export function EnquiryForm() {
           </div>
 
           <div className={`${styles.field} ${styles.full}`}>
-            <label htmlFor="eqMessage">Anything we should know?</label>
+            <label htmlFor="eqMessage">{t.message}</label>
             <textarea
               id="eqMessage"
               name="message"
               rows={4}
               className={`${styles.input} ${styles.textarea}`}
-              placeholder="Arrival time, diets, a celebration?"
+              placeholder={t.placeholder}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
             />
@@ -180,7 +171,7 @@ export function EnquiryForm() {
         </div>
 
         <Button type="submit" block>
-          Send Enquiry
+          {t.send}
         </Button>
 
         <p

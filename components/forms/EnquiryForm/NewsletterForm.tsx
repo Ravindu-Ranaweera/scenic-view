@@ -6,11 +6,19 @@ import { Icon } from "@/components/ui/Icon/Icon";
 
 import styles from "./NewsletterForm.module.css";
 
-export function NewsletterForm() {
+export function NewsletterForm({
+  placeholder = "Email address",
+  subscribe = "Subscribe",
+  subscribed = "Thank you. You are on the list.",
+}: {
+  placeholder?: string;
+  subscribe?: string;
+  subscribed?: string;
+}) {
   const [done, setDone] = useState(false);
 
   if (done) {
-    return <p className={styles.done}>Thank you. You are on the list.</p>;
+    return <p className={styles.done}>{subscribed}</p>;
   }
 
   return (
@@ -26,11 +34,11 @@ export function NewsletterForm() {
         type="email"
         name="email"
         required
-        placeholder="Email address"
-        aria-label="Email address"
+        placeholder={placeholder}
+        aria-label={placeholder}
         className={styles.input}
       />
-      <button type="submit" className={styles.submit} aria-label="Subscribe">
+      <button type="submit" className={styles.submit} aria-label={subscribe}>
         <Icon name="fa-solid fa-arrow-right" />
       </button>
     </form>

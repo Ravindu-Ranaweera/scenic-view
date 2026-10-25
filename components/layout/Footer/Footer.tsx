@@ -1,18 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { NewsletterForm } from "@/components/forms/EnquiryForm/NewsletterForm";
 import { Container } from "@/components/ui/Container/Container";
 import { Icon } from "@/components/ui/Icon/Icon";
+import { getDict, getRooms } from "@/content/i18n";
 import { hotel, telHref } from "@/content/hotel";
-import { navLinks } from "@/content/site";
-import { rooms } from "@/content/rooms";
 import { asset } from "@/lib/assets";
+import { localeFromPathname, localeHref } from "@/lib/i18n";
 
 import styles from "./Footer.module.css";
 
 export function Footer() {
-  const exploreLinks = navLinks.filter((l) => l.href !== "/#contact");
+  const pathname = usePathname();
+  const locale = localeFromPathname(pathname);
+  const t = getDict(locale);
+  const exploreLinks = t.nav.filter((l) => l.href !== "/#contact");
 
   return (
     <footer className={styles.footer}>
@@ -26,10 +32,7 @@ export function Footer() {
               width={900}
               height={502}
             />
-            <p className={styles.blurb}>
-              A four-room hotel on the hillside above Ella, in Sri
-              Lanka&apos;s hill country.
-            </p>
+            <p className={styles.blurb}>{t.footer.blurb}</p>
             <address className={styles.address}>
               {hotel.street}
               <br />
@@ -59,37 +62,51 @@ export function Footer() {
           </div>
 
           <div>
-            <h5>Explore</h5>
+            <h5>{t.footer.explore}</h5>
             <ul>
               {exploreLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link
+                    href={
+                      link.href === "/journal"
+                        ? link.href
+                        : localeHref(locale, link.href)
+                    }
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h5>Our rooms</h5>
+            <h5>{t.footer.ourRooms}</h5>
             <ul>
-              {rooms.map((room) => (
+              {getRooms(locale).map((room) => (
                 <li key={room.slug}>
-                  <Link href={`/rooms/${room.slug}`}>{room.name}</Link>
+                  <Link href={localeHref(locale, `/rooms/${room.slug}`)}>
+                    {room.name}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h5>Stay in touch</h5>
-            <p>Occasional notes on the season and open dates.</p>
-            <NewsletterForm />
+            <h5>{t.footer.stayInTouch}</h5>
+            <p>{t.footer.newsBlurb}</p>
+            <NewsletterForm
+              placeholder={t.footer.emailPlaceholder}
+              subscribe={t.footer.subscribe}
+              subscribed={t.footer.subscribed}
+            />
           </div>
         </div>
 
         <div className={styles.bottom}>
           <span>
-            &copy; {new Date().getFullYear()} {hotel.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {hotel.name}. {t.footer.rights}
           </span>
           <span>{hotel.location}</span>
         </div>
