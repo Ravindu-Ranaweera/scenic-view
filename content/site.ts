@@ -296,6 +296,6 @@ export const heroCopy = {
   heading: "Wake Up to the\nScenic Beauty of Ella",
 };
 
-/** Drone shot of the hotel in the hillside green. */
-export const heroImage = "view-02";
+/** The hotel entrance with its sign, the valley behind. */
+export const heroImage = "hero-view";
 export const pageHeroImage = "view-01";

@@ -6,6 +6,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { Section } from "@/components/ui/Section/Section";
 import { SplitHeading } from "@/components/ui/SplitHeading/SplitHeading";
+import { ButtonLink } from "@/components/ui/Button/Button";
 import { getDict } from "@/content/i18n";
 import { hotel, telHref } from "@/content/hotel";
 import type { Locale } from "@/lib/i18n";
@@ -83,6 +84,14 @@ export function Contact({ locale = "en" }: { locale?: Locale }) {
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
         />
+        <ButtonLink
+          className={styles.directions}
+          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+            `${hotel.name}, ${hotel.address}`,
+          )}`}
+        >
+          {t.contact.directions}
+        </ButtonLink>
       </div>
     </Section>
   );

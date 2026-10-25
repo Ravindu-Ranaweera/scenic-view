@@ -62,71 +62,116 @@
   margin-top: 0.6rem;
 }
 
-/* --- the arched photograph --- */
+/* --- the photograph scrapbook --- */
 
 .figures {
   display: flex;
   justify-content: center;
 }
 
-.arch {
+/* Three snapshots pinned at angles, torn-paper edges via an SVG mask,
+   after the Heading Northwest reference. Sized by aspect ratio so the
+   cluster scales with its column. */
+.scrap {
   position: relative;
-  width: min(100%, 21rem);
-}
-
-/* A capsule: fully rounded at the head and the foot. */
-.photo {
-  position: relative;
+  width: min(100%, 36rem);
+  aspect-ratio: 1 / 1.02;
   z-index: 1;
-  overflow: hidden;
-  border-radius: 14rem;
 }
 
-.photo img {
+.snap {
+  position: absolute;
+}
+
+/* The tilt lives on an inner wrapper: Reveal animates transform on the
+   outer element, so the rotation must not share it. */
+.tilt {
+  display: block;
+  position: relative;
   width: 100%;
-  /* height:auto is required, or next/image's height attribute wins and
-     the aspect-ratio below is ignored. */
-  height: auto;
-  aspect-ratio: 5 / 8;
+  height: 100%;
+  transition: transform 0.9s var(--ease-out-expo);
+}
+
+.snap img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  /* The drone still is landscape with the building on its left, so the
-     portrait capsule crops to that side. */
-  object-position: 18% 50%;
-  transition: transform 1.8s var(--ease-out-expo);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22300%22%20viewBox%3D%220%200%20400%20300%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%2C2%2010%2C3%2019%2C3%2032%2C0%2046%2C0%2059%2C0%2069%2C2%2086%2C1%2097%2C3%20116%2C3%20129%2C5%20138%2C4%20150%2C1%20159%2C2%20177%2C1%20192%2C3%20204%2C3%20213%2C0%20224%2C3%20237%2C2%20252%2C2%20264%2C4%20280%2C1%20295%2C3%20313%2C4%20325%2C5%20335%2C2%20351%2C1%20365%2C0%20381%2C4%20396%2C4%20397%2C0%20397%2C15%20396%2C29%20398%2C48%20400%2C63%20397%2C80%20396%2C99%20398%2C111%20400%2C127%20399%2C140%20400%2C150%20399%2C167%20398%2C178%20400%2C196%20397%2C210%20396%2C228%20399%2C246%20398%2C259%20395%2C277%20399%2C288%20399%2C299%20400%2C297%20389%2C300%20376%2C298%20361%2C295%20345%2C297%20329%2C297%20320%2C296%20303%2C296%20286%2C298%20273%2C299%20258%2C300%20248%2C299%20238%2C298%20229%2C300%20219%2C299%20207%2C300%20188%2C297%20178%2C299%20166%2C298%20156%2C296%20137%2C298%20123%2C300%20113%2C298%20102%2C296%2092%2C300%2073%2C297%2063%2C297%2054%2C297%2035%2C296%2018%2C299%206%2C299%203%2C300%202%2C283%204%2C272%204%2C253%204%2C235%201%2C218%202%2C204%200%2C196%201%2C184%205%2C168%205%2C154%205%2C135%201%2C122%201%2C112%203%2C101%204%2C82%203%2C69%200%2C51%205%2C35%204%2C18%201%2C5Z%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22300%22%20viewBox%3D%220%200%20400%20300%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%2C2%2010%2C3%2019%2C3%2032%2C0%2046%2C0%2059%2C0%2069%2C2%2086%2C1%2097%2C3%20116%2C3%20129%2C5%20138%2C4%20150%2C1%20159%2C2%20177%2C1%20192%2C3%20204%2C3%20213%2C0%20224%2C3%20237%2C2%20252%2C2%20264%2C4%20280%2C1%20295%2C3%20313%2C4%20325%2C5%20335%2C2%20351%2C1%20365%2C0%20381%2C4%20396%2C4%20397%2C0%20397%2C15%20396%2C29%20398%2C48%20400%2C63%20397%2C80%20396%2C99%20398%2C111%20400%2C127%20399%2C140%20400%2C150%20399%2C167%20398%2C178%20400%2C196%20397%2C210%20396%2C228%20399%2C246%20398%2C259%20395%2C277%20399%2C288%20399%2C299%20400%2C297%20389%2C300%20376%2C298%20361%2C295%20345%2C297%20329%2C297%20320%2C296%20303%2C296%20286%2C298%20273%2C299%20258%2C300%20248%2C299%20238%2C298%20229%2C300%20219%2C299%20207%2C300%20188%2C297%20178%2C299%20166%2C298%20156%2C296%20137%2C298%20123%2C300%20113%2C298%20102%2C296%2092%2C300%2073%2C297%2063%2C297%2054%2C297%2035%2C296%2018%2C299%206%2C299%203%2C300%202%2C283%204%2C272%204%2C253%204%2C235%201%2C218%202%2C204%200%2C196%201%2C184%205%2C168%205%2C154%205%2C135%201%2C122%201%2C112%203%2C101%204%2C82%203%2C69%200%2C51%205%2C35%204%2C18%201%2C5Z%22%2F%3E%3C%2Fsvg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  position: relative;
 }
 
-.arch:hover .photo img {
-  transform: scale(1.05);
-}
 
-/* The same capsule as a hairline of gold, sitting a little proud of it. */
-.outline {
+/* A gold rim tracing the torn edge: the same mask on a slightly larger
+   gold shape behind the photograph. */
+.tilt::before {
+  content: "";
   position: absolute;
-  inset: -1.4rem -1rem -0.8rem -1.6rem;
-  border: 2px solid var(--hair-gold);
-  border-radius: 15rem;
-  z-index: 0;
-  pointer-events: none;
+  inset: -5px;
+  background: var(--gold);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22300%22%20viewBox%3D%220%200%20400%20300%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%2C2%2010%2C3%2019%2C3%2032%2C0%2046%2C0%2059%2C0%2069%2C2%2086%2C1%2097%2C3%20116%2C3%20129%2C5%20138%2C4%20150%2C1%20159%2C2%20177%2C1%20192%2C3%20204%2C3%20213%2C0%20224%2C3%20237%2C2%20252%2C2%20264%2C4%20280%2C1%20295%2C3%20313%2C4%20325%2C5%20335%2C2%20351%2C1%20365%2C0%20381%2C4%20396%2C4%20397%2C0%20397%2C15%20396%2C29%20398%2C48%20400%2C63%20397%2C80%20396%2C99%20398%2C111%20400%2C127%20399%2C140%20400%2C150%20399%2C167%20398%2C178%20400%2C196%20397%2C210%20396%2C228%20399%2C246%20398%2C259%20395%2C277%20399%2C288%20399%2C299%20400%2C297%20389%2C300%20376%2C298%20361%2C295%20345%2C297%20329%2C297%20320%2C296%20303%2C296%20286%2C298%20273%2C299%20258%2C300%20248%2C299%20238%2C298%20229%2C300%20219%2C299%20207%2C300%20188%2C297%20178%2C299%20166%2C298%20156%2C296%20137%2C298%20123%2C300%20113%2C298%20102%2C296%2092%2C300%2073%2C297%2063%2C297%2054%2C297%2035%2C296%2018%2C299%206%2C299%203%2C300%202%2C283%204%2C272%204%2C253%204%2C235%201%2C218%202%2C204%200%2C196%201%2C184%205%2C168%205%2C154%205%2C135%201%2C122%201%2C112%203%2C101%204%2C82%203%2C69%200%2C51%205%2C35%204%2C18%201%2C5Z%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22300%22%20viewBox%3D%220%200%20400%20300%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%2C2%2010%2C3%2019%2C3%2032%2C0%2046%2C0%2059%2C0%2069%2C2%2086%2C1%2097%2C3%20116%2C3%20129%2C5%20138%2C4%20150%2C1%20159%2C2%20177%2C1%20192%2C3%20204%2C3%20213%2C0%20224%2C3%20237%2C2%20252%2C2%20264%2C4%20280%2C1%20295%2C3%20313%2C4%20325%2C5%20335%2C2%20351%2C1%20365%2C0%20381%2C4%20396%2C4%20397%2C0%20397%2C15%20396%2C29%20398%2C48%20400%2C63%20397%2C80%20396%2C99%20398%2C111%20400%2C127%20399%2C140%20400%2C150%20399%2C167%20398%2C178%20400%2C196%20397%2C210%20396%2C228%20399%2C246%20398%2C259%20395%2C277%20399%2C288%20399%2C299%20400%2C297%20389%2C300%20376%2C298%20361%2C295%20345%2C297%20329%2C297%20320%2C296%20303%2C296%20286%2C298%20273%2C299%20258%2C300%20248%2C299%20238%2C298%20229%2C300%20219%2C299%20207%2C300%20188%2C297%20178%2C299%20166%2C298%20156%2C296%20137%2C298%20123%2C300%20113%2C298%20102%2C296%2092%2C300%2073%2C297%2063%2C297%2054%2C297%2035%2C296%2018%2C299%206%2C299%203%2C300%202%2C283%204%2C272%204%2C253%204%2C235%201%2C218%202%2C204%200%2C196%201%2C184%205%2C168%205%2C154%205%2C135%201%2C122%201%2C112%203%2C101%204%2C82%203%2C69%200%2C51%205%2C35%204%2C18%201%2C5Z%22%2F%3E%3C%2Fsvg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  filter: drop-shadow(0 16px 28px rgba(14, 79, 91, 0.3));
 }
 
-/* The second photograph, as a small disc on the lower edge. */
-.disc {
-  position: absolute;
-  left: -2.4rem;
-  bottom: 3.5rem;
+/* The building at dawn, the anchor of the cluster. */
+.snapMain {
+  top: 0;
+  right: 0;
+  width: 82%;
+  aspect-ratio: 17 / 11;
+  z-index: 1;
+}
+
+.snapMain .tilt {
+  transform: rotate(-2deg);
+}
+
+/* The aerial, laid over its lower left. */
+.snapAerial {
+  top: 36%;
+  left: 0;
+  width: 58%;
+  aspect-ratio: 16 / 11;
   z-index: 2;
-  width: 8.5rem;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 7px solid var(--ivory);
-  box-shadow: var(--shadow-lift);
 }
 
-.disc img {
-  width: 100%;
-  height: auto;
+.snapAerial .tilt {
+  transform: rotate(-5deg);
+}
+
+/* The balcony view, tucked in at the lower right. */
+.snapBalcony {
+  bottom: 0;
+  right: 5%;
+  width: 44%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+  z-index: 3;
+}
+
+.snapBalcony .tilt {
+  transform: rotate(6deg);
+}
+
+/* On hover a snapshot straightens and lifts, as if picked up. */
+.snap:hover {
+  z-index: 4;
+}
+
+.snap:hover .tilt {
+  transform: rotate(0deg) scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transition: none;
+  }
 }
 
 @media (max-width: 991px) {
@@ -137,19 +182,9 @@
   .figures {
     order: -1;
   }
-  .disc {
-    left: -1rem;
-    width: 7rem;
-  }
 }
 
 @media (max-width: 520px) {
-  .arch {
-    width: min(100%, 17rem);
-  }
-  .disc {
-    display: none;
-  }
   .facts {
     grid-template-columns: 1fr;
     gap: 1.6rem;

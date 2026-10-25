@@ -2,24 +2,28 @@ import Image from "next/image";
 
 import { CheckAvailability } from "@/components/home/CheckAvailability/CheckAvailability";
 import { ButtonLink } from "@/components/ui/Button/Button";
+import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
+import { Icon } from "@/components/ui/Icon/Icon";
 import { Container } from "@/components/ui/Container/Container";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { SplitHeading } from "@/components/ui/SplitHeading/SplitHeading";
-import { getDict, getRooms } from "@/content/i18n";
-import { hotel } from "@/content/hotel";
+import { getDict } from "@/content/i18n";
 import { heroImage } from "@/content/site";
 import { asset } from "@/lib/assets";
 import { localeHref, type Locale } from "@/lib/i18n";
 
 import styles from "./Hero.module.css";
 
+const featureIcons = [
+  "fa-solid fa-binoculars",
+  "fa-solid fa-mountain-sun",
+  "fa-solid fa-hand-holding-heart",
+  "fa-solid fa-utensils",
+  "fa-solid fa-wifi",
+];
+
 export function Hero({ locale = "en" }: { locale?: Locale }) {
   const t = getDict(locale);
-  const stats = [
-    { num: String(hotel.roomCount), label: t.hero.statRooms },
-    { num: String(getRooms(locale).length), label: t.hero.statTypes },
-    { num: hotel.rating, label: t.hero.statRating },
-  ];
 
   return (
     <section className={styles.hero} id="top">
@@ -37,6 +41,10 @@ export function Hero({ locale = "en" }: { locale?: Locale }) {
 
       <Container>
         <div className={styles.inner}>
+          <Reveal variant="up">
+            <Eyebrow onDark>{t.hero.eyebrow}</Eyebrow>
+          </Reveal>
+
           <SplitHeading
             as="h1"
             text={t.hero.heading}
@@ -64,12 +72,10 @@ export function Hero({ locale = "en" }: { locale?: Locale }) {
 
           <Reveal variant="up" delay={760}>
             <div className={styles.rail}>
-              {stats.map((stat) => (
-                <div key={stat.label} className={styles.stat}>
-                  <span className={`${styles.statNum} u-lining`}>
-                    {stat.num}
-                  </span>
-                  <span className={styles.statLabel}>{stat.label}</span>
+              {t.hero.features.map((feature, index) => (
+                <div key={feature} className={styles.feature}>
+                  <Icon name={featureIcons[index] ?? "fa-solid fa-circle"} />
+                  <span>{feature}</span>
                 </div>
               ))}
               <span className={styles.cue}>

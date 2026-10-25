@@ -18,11 +18,19 @@ export const de: Dict = {
   ],
   bookNow: "Jetzt buchen",
   hero: {
+    eyebrow: "Ihre ruhige Bergauszeit in Ella",
     heading: "Aufwachen inmitten\nder Berge von Ella",
     tagline:
-      "Ein kleines Hotel am Hang über Ella, wo jedes Zimmer auf die Berge blickt und der Morgen über einem Wolkenmeer beginnt.",
+      "Ein Hotel am Hang über Ella, wo jedes Zimmer auf die Berge blickt und der Morgen über einem Wolkenmeer beginnt.",
     checkAvailability: "Verfügbarkeit prüfen",
     viewRooms: "Zimmer ansehen",
+    features: [
+      "Panorama-Bergblick",
+      "Eigener Balkon und Terrasse",
+      "Familiengeführte Gastfreundschaft",
+      "Hauseigenes Restaurant",
+      "Kostenloses WLAN und Parken",
+    ],
     statRooms: "Zimmer",
     statTypes: "Zimmertypen",
     statRating: "Gästebewertung",
@@ -142,6 +150,7 @@ export const de: Dict = {
     email: "E-Mail",
     checkInOut: "Check-in / Check-out",
     fromUntilFmt: "Ab {in} · bis {out}",
+    directions: "Route planen",
     mapTitle: "Karte mit dem Hotel Scenic View Ella",
   },
   enquiry: {

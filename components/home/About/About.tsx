@@ -37,25 +37,49 @@ export function About({ locale = "en" }: { locale?: Locale }) {
         </div>
 
         <div className={styles.figures}>
-          <div className={styles.arch}>
-            <span className={styles.outline} aria-hidden="true" />
-
-            <Reveal variant="mask" className={styles.photo}>
-              <Image
-                src={asset("/img/about-hotel.jpg")}
-                alt={`${hotel.name} seen from the air at dawn`}
-                width={1800}
-                height={1057}
-              />
+          <div className={styles.scrap}>
+            <Reveal
+              variant="up"
+              className={`${styles.snap} ${styles.snapMain}`}
+            >
+              <span className={styles.tilt}>
+                <Image
+                  src={asset("/img/about-hotel.jpg")}
+                  alt={`${hotel.name} seen from the air at dawn`}
+                  width={1800}
+                  height={1057}
+                />
+              </span>
             </Reveal>
 
-            <Reveal variant="mask" delay={280} className={styles.disc}>
-              <Image
-                src={asset("/img/view-04.jpg")}
-                alt="Balcony looking out towards the mountains"
-                width={400}
-                height={400}
-              />
+            <Reveal
+              variant="up"
+              delay={220}
+              className={`${styles.snap} ${styles.snapAerial}`}
+            >
+              <span className={styles.tilt}>
+                <Image
+                  src={asset("/img/about-view.jpg")}
+                  alt={`${hotel.name} among the trees on the hillside`}
+                  width={1800}
+                  height={1013}
+                />
+              </span>
+            </Reveal>
+
+            <Reveal
+              variant="up"
+              delay={420}
+              className={`${styles.snap} ${styles.snapBalcony}`}
+            >
+              <span className={styles.tilt}>
+                <Image
+                  src={asset("/img/view-04.jpg")}
+                  alt="Balcony looking out towards the mountains"
+                  width={400}
+                  height={400}
+                />
+              </span>
             </Reveal>
           </div>
         </div>

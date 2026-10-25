@@ -23,10 +23,18 @@ export const en: Dict = {
   nav: navLinks,
   bookNow: "Book Now",
   hero: {
+    eyebrow: "Your peaceful mountain escape in Ella",
     heading: heroCopy.heading,
     tagline: hotel.tagline,
     checkAvailability: "Check Availability",
     viewRooms: "View Rooms",
+    features: [
+      "Panoramic Mountain Views",
+      "Private Balcony & Terrace",
+      "Family-Run Hospitality",
+      "On-Site Restaurant",
+      "Free Wi-Fi & Parking",
+    ],
     statRooms: "Rooms",
     statTypes: "Room types",
     statRating: "Guest rating",
@@ -80,6 +88,7 @@ export const en: Dict = {
     email: "Email",
     checkInOut: "Check in / out",
     fromUntilFmt: "From {in} · until {out}",
+    directions: "Get Directions",
     mapTitle: `Map showing ${hotel.name}`,
   },
   enquiry: {

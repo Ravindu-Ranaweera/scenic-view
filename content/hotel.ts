@@ -11,7 +11,7 @@ export const hotel: Hotel = {
   shortName: "Scenic View Ella",
   location: "Ella, Sri Lanka",
   tagline:
-    "A small hotel on the hillside above Ella, where every room opens onto the mountains and the morning arrives over a sea of cloud.",
+    "A hotel on the hillside above Ella, where every room opens onto the mountains and the morning arrives over a sea of cloud.",
   roomCount: 4,
 
   street: "12/A Mahamewnawa Road",

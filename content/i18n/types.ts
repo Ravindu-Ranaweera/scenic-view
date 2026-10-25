@@ -18,10 +18,13 @@ export type Dict = {
   nav: { label: string; href: string }[];
   bookNow: string;
   hero: {
+    eyebrow: string;
     heading: string;
     tagline: string;
     checkAvailability: string;
     viewRooms: string;
+    /** Five short labels for the strip along the hero's foot. */
+    features: string[];
     statRooms: string;
     statTypes: string;
     statRating: string;
@@ -58,6 +61,7 @@ export type Dict = {
     checkInOut: string;
     /** "{in}" and "{out}" are replaced with the times. */
     fromUntilFmt: string;
+    directions: string;
     mapTitle: string;
   };
   enquiry: {

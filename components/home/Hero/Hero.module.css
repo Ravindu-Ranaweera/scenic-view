@@ -34,22 +34,17 @@
   inset: 0;
   background:
     linear-gradient(
-      0deg,
-      rgba(10, 58, 67, 0.88) 0%,
-      rgba(10, 58, 67, 0.55) 22%,
-      rgba(10, 58, 67, 0.18) 44%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 60% 55% at 18% 78%,
-      rgba(10, 58, 67, 0.5),
-      transparent 70%
+      100deg,
+      rgba(8, 44, 51, 0.78) 0%,
+      rgba(8, 44, 51, 0.55) 34%,
+      rgba(8, 44, 51, 0.22) 52%,
+      transparent 68%
     ),
     linear-gradient(
-      180deg,
-      rgba(10, 58, 67, 0.38) 0%,
-      rgba(10, 58, 67, 0.14) 18%,
-      transparent 34%
+      0deg,
+      rgba(8, 44, 51, 0.82) 0%,
+      rgba(8, 44, 51, 0.35) 22%,
+      transparent 44%
     );
 }
 
@@ -65,6 +60,7 @@
 }
 
 .title {
+  font-weight: 600;
   font-size: var(--fs-display);
   color: var(--ivory);
   max-width: 24ch;
@@ -104,12 +100,31 @@
 
 .rail {
   display: grid;
-  grid-template-columns: repeat(3, auto) 1fr;
+  grid-template-columns: repeat(5, auto) 1fr;
   align-items: center;
   gap: clamp(1.5rem, 1rem + 2.5vw, 3.5rem);
   margin-top: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
   padding-top: 1.6rem;
   border-top: 1px solid var(--hair-light);
+}
+
+/* One feature in the strip: a gold icon and a short label. */
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.feature i {
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+.feature span {
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.85);
 }
 
 .stat {
@@ -203,5 +218,18 @@
   .rail {
     grid-template-columns: 1fr 1fr;
     row-gap: 1.2rem;
+  }
+}
+
+/* The five features wrap into two rows on narrow screens, and the
+   scroll cue steps aside. */
+@media (max-width: 991px) {
+  .rail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem 1.6rem;
+  }
+  .cue {
+    display: none;
   }
 }
