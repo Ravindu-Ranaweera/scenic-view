@@ -134,7 +134,7 @@ export const en: Dict = {
     extras: stayExtras,
   },
   footer: {
-    blurb: "A four-room hotel on the hillside above Ella, in Sri Lanka's hill country.",
+    blurb: "A hotel on the hillside above Ella, in Sri Lanka's hill country.",
     explore: "Explore",
     ourRooms: "Our rooms",
     stayInTouch: "Stay in touch",

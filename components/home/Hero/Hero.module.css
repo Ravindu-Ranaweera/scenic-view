@@ -233,3 +233,44 @@
     display: none;
   }
 }
+
+/* Phones: a phone-height cover crop of a wide landscape shows only a
+   slice of wall, so the whole photograph is shown instead, edge to edge
+   at its own proportions, at the top of the hero. It fades at the foot
+   into the night background that carries the text. */
+@media (max-width: 767px) {
+  .hero {
+    display: block;
+  }
+  .frame {
+    position: relative;
+    inset: auto;
+    /* The hero photograph's own proportions (2400 x 1558). */
+    aspect-ratio: 2400 / 1558;
+  }
+  .bg {
+    transform: none;
+    animation: none;
+  }
+  .scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(14, 79, 91, 0.3) 0%,
+      transparent 22%,
+      transparent 72%,
+      var(--night) 100%
+    );
+  }
+  .inner {
+    padding-top: 0.5rem;
+  }
+  .title,
+  .sub {
+    text-shadow: none;
+  }
+  /* The feature rail is desktop furniture; on a phone it only pushes
+     the page down after the buttons. */
+  .rail {
+    display: none;
+  }
+}

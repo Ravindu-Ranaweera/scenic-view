@@ -202,7 +202,7 @@ export const de: Dict = {
     ],
   },
   footer: {
-    blurb: "Ein Hotel mit vier Zimmern am Hang über Ella, im Hochland von Sri Lanka.",
+    blurb: "Ein Hotel am Hang über Ella, im Hochland von Sri Lanka.",
     explore: "Entdecken",
     ourRooms: "Unsere Zimmer",
     stayInTouch: "In Kontakt bleiben",
