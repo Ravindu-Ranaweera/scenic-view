@@ -46,7 +46,7 @@ export const en: Dict = {
   },
   roomsSection: {
     eyebrow: "Rooms",
-    heading: "Four rooms. Every one facing the mountains.",
+    heading: "Four room types. Every one facing the mountains.",
     blurb:
       "Every room has a mountain view, a private balcony or terrace, a hot shower, a television and free Wi-Fi. Breakfast is included with every room.",
   },

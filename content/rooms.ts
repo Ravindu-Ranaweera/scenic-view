@@ -7,6 +7,18 @@ import type { Extra, Room } from "@/lib/types";
  * Rates are deliberately not published. The owner asked for no prices
  * on the site, so priceLKR and taxesLKR stay null and nothing renders them.
  */
+/**
+ * Photographs every room shares: the attached bathroom, the balcony doors,
+ * and the sunrise over the valley. Appended to each room's own set.
+ */
+export const sharedImages = [
+  "window-01",
+  "bathroom-01",
+  "bathroom-02",
+  "bathroom-03",
+  "sunrise-01",
+];
+
 export const rooms: Room[] = [
   {
     slug: "mountain-view-twin",
@@ -21,16 +33,16 @@ export const rooms: Room[] = [
     bathroom: "Private",
     outlook: "Mountain view",
     outlookIcon: "fa-solid fa-mountain-sun",
-    size: "28 m²",
-    images: ["twin-03", "twin-01", "twin-02", "twin-04"],
+    size: "30 m²",
+    images: ["twin-03", "twin-01", "twin-02", "twin-04", ...sharedImages],
     intro:
-      "The same 28 m² and the same view, with two full beds rather than one large one. Our room for friends travelling together, or anyone who would rather not share a mattress.",
+      "The same 30 m² and the same view, with two full beds rather than one large one. Our room for friends travelling together, or anyone who would rather not share a mattress.",
     detail:
       "Air conditioning, a seating area by the window, a wardrobe, and a private bathroom with a hot shower. The balcony doors open onto the same valley.",
     cardMeta: [
       { icon: "fa-solid fa-bed", label: "2 Full" },
       { icon: "fa-solid fa-user-group", label: "2 Guests" },
-      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "28 m²" },
+      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "30 m²" },
     ],
     amenities: [
       { icon: "fa-solid fa-mountain-sun", label: "Balcony and terrace" },
@@ -55,8 +67,8 @@ export const rooms: Room[] = [
     bathroom: "Private",
     outlook: "Mountain view",
     outlookIcon: "fa-solid fa-mountain-sun",
-    size: "28 m²",
-    images: ["deluxe-03", "deluxe-07", "deluxe-06", "deluxe-04"],
+    size: "30 m²",
+    images: ["deluxe-03", "deluxe-07", "deluxe-06", "deluxe-04", ...sharedImages],
     intro:
       "The room people write to us about afterwards. A king bed, a minibar, and full-height doors onto a balcony with two chairs and a table, looking straight down the valley.",
     detail:
@@ -64,7 +76,7 @@ export const rooms: Room[] = [
     cardMeta: [
       { icon: "fa-solid fa-bed", label: "1 King" },
       { icon: "fa-solid fa-user-group", label: "2 Guests" },
-      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "28 m²" },
+      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "30 m²" },
     ],
     amenities: [
       { icon: "fa-solid fa-mountain-sun", label: "Balcony and terrace" },
@@ -90,16 +102,16 @@ export const rooms: Room[] = [
     bathroom: "Private",
     outlook: "Mountain view",
     outlookIcon: "fa-solid fa-mountain-sun",
-    size: "22 m²",
-    images: ["comfort-01", "comfort-03", "comfort-02", "comfort-04"],
+    size: "30 m²",
+    images: ["comfort-01", "comfort-03", "comfort-02", "comfort-04", ...sharedImages],
     intro:
-      "Our smallest and best-value room, and the one that goes first. A queen bed, a wardrobe, and a private bathroom with a hot shower, with the balcony doors opening onto the valley.",
+      "A spacious, best-value room, and the one that goes first. A queen bed, a wardrobe, and a private bathroom with a hot shower, with the balcony doors opening onto the valley.",
     detail:
-      "This is the one room without air conditioning. At this elevation the nights are cool enough that most guests never reach for it, but if you want it, take one of the 28 m² rooms instead.",
+      "This is the one room without air conditioning. At this elevation the nights are cool enough that most guests never reach for it, but if you want it, take one of the air-conditioned rooms instead.",
     cardMeta: [
       { icon: "fa-solid fa-bed", label: "1 Queen" },
       { icon: "fa-solid fa-user-group", label: "2 Guests" },
-      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "22 m²" },
+      { icon: "fa-solid fa-up-right-and-down-left-from-center", label: "30 m²" },
     ],
     amenities: [
       { icon: "fa-solid fa-mountain-sun", label: "Balcony and terrace" },
@@ -124,7 +136,7 @@ export const rooms: Room[] = [
     outlook: "Mountain view",
     outlookIcon: "fa-solid fa-mountain-sun",
     size: "33 m²",
-    images: ["family-03", "family-02", "family-04", "family-01"],
+    images: ["family-03", "family-02", "family-04", "family-01", ...sharedImages],
     intro:
       "Thirty-three square metres and two queen beds, with room for a family of four to spread out. Tell us how you would like the beds made up and we will have it ready.",
     detail:

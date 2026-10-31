@@ -46,7 +46,7 @@ export const de: Dict = {
   },
   roomsSection: {
     eyebrow: "Zimmer",
-    heading: "Vier Zimmer. Jedes mit Blick auf die Berge.",
+    heading: "Vier Zimmertypen. Jeder mit Blick auf die Berge.",
     blurb:
       "Jedes Zimmer hat Bergblick, einen eigenen Balkon oder eine Terrasse, eine heiße Dusche, einen Fernseher und kostenloses WLAN. Das Frühstück ist bei jedem Zimmer inbegriffen.",
   },
@@ -69,12 +69,12 @@ export const de: Dict = {
         body: "Frühstück jeden Morgen und Abendessen auf Wunsch, im Speiseraum.",
       },
       {
-        title: "Warmes Wasser",
-        body: "Richtig heiße Duschen in jedem Zimmer. Nachts wird es hier oben kühl.",
+        title: "Warmes Wasser und Pflegeprodukte",
+        body: "Richtig heiße Duschen in jedem Zimmer, mit Scenic-View-Shampoo und Duschgel, täglich erneuert.",
       },
       {
         title: "Klimaanlage",
-        body: "In jedem Zimmer außer dem 22-m²-Doppelzimmer, wo die Nächte die Arbeit übernehmen.",
+        body: "In jedem Zimmer außer dem Doppelzimmer mit Bergblick, wo die Nächte die Arbeit übernehmen.",
       },
       {
         title: "Kostenloses WLAN",
@@ -85,8 +85,8 @@ export const de: Dict = {
         body: "Tee, Kaffee und Flaschenwasser warten im Zimmer.",
       },
       {
-        title: "Eigene Pflegeprodukte",
-        body: "Scenic-View-Shampoo und Duschgel, täglich erneuert.",
+        title: "Flachbildfernseher",
+        body: "Ein Flachbildfernseher in jedem Zimmer.",
       },
       {
         title: "Parkplatz und Transfers",
@@ -235,7 +235,6 @@ export const de: Dict = {
     "Check-in ab [14:00], Check-out bis [11:00].",
     "Kontinentales Frühstück ist bei jedem Zimmer inbegriffen.",
     "Keine Vorauszahlung nötig. Sie zahlen vor Ort, zur Buchung ist keine Karte erforderlich.",
-    "Nur Barzahlung. Das Haus akzeptiert keine Kartenzahlung.",
     "Keine Altersbeschränkung beim Check-in.",
     "Haustiere sind nicht erlaubt.",
     "Partys und Veranstaltungen sind nicht erlaubt.",
@@ -247,7 +246,7 @@ export const de: Dict = {
       name: "Twin mit Bergblick",
       tagline: "Zwei Betten, ein Balkon und ein Tisch zum Sitzen.",
       intro:
-        "Dieselben 28 m² und dieselbe Aussicht, mit zwei einzelnen Betten statt einem großen. Unser Zimmer für gemeinsam reisende Freunde und alle, die lieber ihre eigene Matratze haben.",
+        "Dieselben 30 m² und dieselbe Aussicht, mit zwei Betten statt einem großen. Unser Zimmer für gemeinsam reisende Freunde und alle, die lieber ihre eigene Matratze haben.",
       detail:
         "Klimaanlage, eine Sitzecke am Fenster, ein Kleiderschrank und ein eigenes Bad mit heißer Dusche. Die Balkontüren öffnen sich auf dasselbe Tal.",
       badge: "Zwei Betten",
@@ -290,9 +289,9 @@ export const de: Dict = {
       name: "Doppelzimmer mit Bergblick",
       tagline: "Ein Queensize-Bett, ein Balkon und das Tal direkt davor.",
       intro:
-        "Unser kleinstes und günstigstes Zimmer, und das, das zuerst weg ist. Ein Queensize-Bett, ein Kleiderschrank und ein eigenes Bad mit heißer Dusche, die Balkontüren öffnen sich zum Tal.",
+        "Ein geräumiges, günstiges Zimmer, und das, das zuerst weg ist. Ein Queensize-Bett, ein Kleiderschrank und ein eigenes Bad mit heißer Dusche, die Balkontüren öffnen sich zum Tal.",
       detail:
-        "Das einzige Zimmer ohne Klimaanlage. Auf dieser Höhe sind die Nächte kühl genug, dass die meisten Gäste sie nie vermissen. Wer sie möchte, nimmt eines der 28-m²-Zimmer.",
+        "Das einzige Zimmer ohne Klimaanlage. Auf dieser Höhe sind die Nächte kühl genug, dass die meisten Gäste sie nie vermissen. Wer sie möchte, nimmt eines der klimatisierten Zimmer.",
       badge: "Bester Preis",
       beds: "1 Queensize-Bett",
       bathroom: "Eigenes Bad",

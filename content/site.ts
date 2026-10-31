@@ -30,13 +30,13 @@ export const facilities: Facility[] = [
   },
   {
     icon: "fa-solid fa-shower",
-    title: "Hot water",
-    body: "Proper hot showers in every room. It gets cold up here at night.",
+    title: "Hot water & toiletries",
+    body: "Proper hot showers in every room, with Scenic View shampoo and shower gel replaced daily.",
   },
   {
     icon: "fa-solid fa-snowflake",
     title: "Air conditioning",
-    body: "In every room except the 22 m² double, where the nights do the work.",
+    body: "In every room except the Mountain View Double, where the nights do the work.",
   },
   {
     icon: "fa-solid fa-wifi",
@@ -49,9 +49,9 @@ export const facilities: Facility[] = [
     body: "Tea, coffee and bottled water waiting in the room.",
   },
   {
-    icon: "fa-solid fa-pump-soap",
-    title: "Our own toiletries",
-    body: "Scenic View shampoo and shower gel, replaced daily.",
+    icon: "fa-solid fa-tv",
+    title: "Flat-screen TV",
+    body: "A flat-screen television in every room.",
   },
   {
     icon: "fa-solid fa-car",
@@ -273,7 +273,6 @@ export const houseRules = [
   "Check in from [14:00]; check out by [11:00].",
   "Continental breakfast is included with every room.",
   "No prepayment needed. You pay at the property, and no card is required to book.",
-  "Cash only. The property does not take card payments.",
   "No age restriction: there is no minimum age for check-in.",
   "Pets are not allowed.",
   "Parties and events are not allowed.",
