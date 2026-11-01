@@ -9,14 +9,14 @@ import { asset } from "@/lib/assets";
 
 import styles from "./Gallery.module.css";
 
-/** Three marquee rows, twenty photos between them. The middle row runs
- *  the other way. Order within a row is just a pleasant mix of wide and
- *  tall. gal-16 to gal-20 are the balcony doors, the sunrise and the
+/** Three marquee rows, six photos each. The middle row runs the other
+ *  way. Order within a row is just a pleasant mix of wide and tall.
+ *  gal-16, gal-17 and gal-18 are the balcony doors, the sunrise and the
  *  bathroom, which also appear on every room page. */
 const rows = [
-  ["gal-01", "gal-02", "gal-11", "gal-16", "gal-04", "gal-07", "gal-18"],
-  ["gal-03", "gal-12", "gal-05", "gal-17", "gal-08", "gal-13", "gal-19"],
-  ["gal-09", "gal-14", "gal-06", "gal-10", "gal-20", "gal-15"],
+  ["gal-01", "gal-02", "gal-11", "gal-16", "gal-04", "gal-07"],
+  ["gal-03", "gal-12", "gal-05", "gal-17", "gal-08", "gal-13"],
+  ["gal-09", "gal-14", "gal-06", "gal-10", "gal-18", "gal-15"],
 ];
 
 const all = rows.flat();
