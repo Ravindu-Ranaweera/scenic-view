@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import { Header } from "@/components/layout/Header/Header";
@@ -62,14 +62,82 @@ export const metadata: Metadata = {
     template: `%s | ${hotel.name}`,
   },
   description:
-    "An eight-room hotel above Ella, Sri Lanka. Private balconies over the valley, sunrise above the mist, and Little Adam's Peak and the Nine Arch Bridge on the doorstep.",
+    "A four-room boutique hotel above Ella, Sri Lanka. Private balconies over the valley, sunrise above the mist, breakfast included, Nine Arch Bridge nearby.",
+  applicationName: hotel.name,
+  authors: [{ name: hotel.name, url: siteUrl }],
+  creator: hotel.name,
+  publisher: hotel.name,
+  category: "travel",
+  /**
+   * Keywords carry no ranking weight at Google and have not for years.
+   * They stay because Yandex still reads them, and Russian guests are
+   * the second-largest group in the guest book.
+   */
+  keywords: [
+    "hotel in Ella Sri Lanka",
+    "Ella hotels with mountain view",
+    "where to stay in Ella",
+    "boutique hotel Ella",
+    "accommodation near Nine Arch Bridge",
+    "hotel near Little Adam's Peak",
+    "Scenic View Ella",
+  ],
+  /**
+   * `max-image-preview: large` is the one directive here that changes
+   * anything visible. Without it Google shows a thumbnail next to the
+   * result; with it a hotel gets a full-width photograph, which is the
+   * whole argument for this property.
+   */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+    languages: { en: "/", ru: "/ru", de: "/de", "x-default": "/" },
+  },
   openGraph: {
-    title: `${hotel.name} | Hotel with Mountain Views`,
-    description:
-      "Eight rooms above the Ella valley. Balconies, mist at sunrise, and the hill country at the door.",
     type: "website",
+    siteName: hotel.name,
+    locale: "en_GB",
+    alternateLocale: ["ru_RU", "de_DE"],
+    url: siteUrl,
+    title: `${hotel.name} | Hotel with Mountain Views, Ella, Sri Lanka`,
+    description:
+      "Four rooms above the Ella valley. Private balconies, mist at sunrise, breakfast included, and the hill country at the door.",
+    images: [
+      {
+        url: `/img/${heroImage}.jpg`,
+        width: 1800,
+        height: 1200,
+        alt: `${hotel.name}, a hotel above the valley in Ella, Sri Lanka`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${hotel.name} | Hotel with Mountain Views, Ella, Sri Lanka`,
+    description:
+      "Four rooms above the Ella valley. Private balconies, mist at sunrise, and the hill country at the door.",
     images: [`/img/${heroImage}.jpg`],
   },
+  /* Sri Lankan phone numbers get auto-linked into unwanted blue text
+     by Safari unless this is off; the real tel: links are explicit. */
+  formatDetection: { telephone: false, address: false, email: false },
+};
+
+/** Sets the browser chrome colour and locks the viewport sanely. */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0e4f5b",
 };
 
 export default function RootLayout({
@@ -81,7 +149,22 @@ export default function RootLayout({
       className={`${cormorant.variable} ${inter.variable} ${cormorantCyr.variable} ${interCyr.variable}`}
     >
       <head>
-        {/* Font Awesome Free. Served from a CDN so the static export stays small. */}
+        {/* Font Awesome Free. Served from a CDN so the static export
+            stays small.
+
+            This stylesheet is render-blocking and it is on a different
+            origin, so the browser pays a DNS lookup, a TCP handshake
+            and a TLS negotiation before a single byte of CSS arrives.
+            The preconnect starts all three while the HTML is still
+            parsing, which is worth roughly a third of a second on a
+            mobile connection and feeds straight into Largest
+            Contentful Paint. */}
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+        <link
+          rel="preconnect"
+          href="https://cdnjs.cloudflare.com"
+          crossOrigin="anonymous"
+        />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"

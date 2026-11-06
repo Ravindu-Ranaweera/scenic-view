@@ -1,0 +1,101 @@
+.blurb {
+  max-width: 44rem;
+  margin: -0.5rem auto clamp(2rem, 1.4rem + 1.6vw, 3rem);
+  text-align: center;
+  color: var(--smoke);
+}
+
+/* Two columns on a wide screen. Twelve questions in one column is a
+   scroll nobody finishes; side by side they read as a reference. */
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: clamp(1.5rem, 0.8rem + 2.4vw, 3.5rem);
+  align-items: start;
+}
+
+.item {
+  border-bottom: 1px solid var(--hair);
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.15rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Safari still paints its own disclosure triangle without this. */
+.question::-webkit-details-marker {
+  display: none;
+}
+
+.question h3 {
+  font-size: 1.08rem;
+  line-height: 1.4;
+  margin: 0;
+  transition: color 0.4s var(--ease);
+}
+
+.item:hover .question h3,
+.item[open] .question h3 {
+  color: var(--gold-dk);
+}
+
+/* A plus that rotates into a minus, drawn in CSS so the icon font is
+   not on the critical path for a section this far down the page. */
+.marker {
+  position: relative;
+  flex: 0 0 auto;
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.marker::before,
+.marker::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1px;
+  background: var(--gold-dk);
+  transition: transform 0.45s var(--ease-out-expo);
+}
+
+.marker::after {
+  transform: rotate(90deg);
+}
+
+.item[open] .marker::after {
+  transform: rotate(0deg);
+}
+
+.answer {
+  margin: 0;
+  padding: 0 2rem 1.4rem 0;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--smoke);
+}
+
+@media (max-width: 767px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+
+  .question h3 {
+    font-size: 1rem;
+  }
+}
+
+/* The rotation is decoration; the open and closed states still differ
+   without it. */
+@media (prefers-reduced-motion: reduce) {
+  .marker::before,
+  .marker::after,
+  .question h3 {
+    transition: none;
+  }
+}

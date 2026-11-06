@@ -39,13 +39,39 @@ jobs:
           npx tsc --noEmit
           npx eslint .
 
+      # Switching to a real domain is the single largest ranking change
+      # available to this site: a project site lives in a subfolder of a
+      # shared github.io host, so it inherits none of its own authority
+      # and every URL carries the repo name.
+      #
+      # To switch, set a repository variable named CUSTOM_DOMAIN to the
+      # bare hostname (Settings > Secrets and variables > Actions >
+      # Variables), e.g. scenicviewella.com. This step then drops the
+      # base path, points every canonical and sitemap URL at the domain,
+      # and writes the CNAME file GitHub Pages needs. Nothing else in
+      # the repository has to change.
+      - name: Resolve deployment URLs
+        id: urls
+        env:
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+        run: |
+          if [ -n "$CUSTOM_DOMAIN" ]; then
+            echo "base_path=" >> "$GITHUB_OUTPUT"
+            echo "site_url=https://$CUSTOM_DOMAIN" >> "$GITHUB_OUTPUT"
+            echo "$CUSTOM_DOMAIN" > public/CNAME
+            echo "Building for https://$CUSTOM_DOMAIN"
+          else
+            echo "base_path=/${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
+            echo "site_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
+            echo "No CUSTOM_DOMAIN variable set; building for the github.io project site."
+          fi
+
       - name: Build static export
         env:
           # A project site is served from /<repo>, so every asset path
-          # needs that prefix. Derived from the repo name so a rename
-          # does not silently break the build.
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
-          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          # needs that prefix. Empty once a custom domain is in use.
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.urls.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.urls.outputs.site_url }}
         run: npm run build
 
       - uses: actions/configure-pages@v5

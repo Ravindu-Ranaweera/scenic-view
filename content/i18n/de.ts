@@ -5,11 +5,11 @@ export const de: Dict = {
   meta: {
     title: "Scenic View Ella | Hotel mit Bergblick, Ella, Sri Lanka",
     description:
-      "Ein Hotel mit vier Zimmern über Ella, Sri Lanka. Eigene Balkone über dem Tal, Sonnenaufgang über dem Nebel, und Little Adam's Peak und die Nine Arch Bridge direkt vor der Tür.",
+      "Vier Zimmer über Ella, Sri Lanka. Eigene Balkone über dem Tal, Sonnenaufgang über dem Nebel, die Nine Arch Bridge ganz in der Nähe.",
   },
   nav: [
     { label: "Das Hotel", href: "/#about" },
-    { label: "Zimmer", href: "/#rooms" },
+    { label: "Zimmer", href: "/rooms" },
     { label: "Ausstattung", href: "/#facilities" },
     { label: "Ella", href: "/#nearby" },
     { label: "Galerie", href: "/#gallery" },
@@ -135,6 +135,84 @@ export const de: Dict = {
     heading: "Was Gäste danach schreiben.",
     readMore: "Mehr lesen",
     readLess: "Weniger anzeigen",
+    countedWord: "Gästebewertungen",
+  },
+  faq: {
+    eyebrow: "Vor der Buchung",
+    heading: "Was Gäste uns fragen.",
+    blurb:
+      "Steht Ihre Frage nicht dabei, schreiben Sie uns über WhatsApp. Dort antworten wir am schnellsten.",
+    items: [
+      {
+        question: "Wie weit ist Scenic View Ella vom Ortszentrum Ella entfernt?",
+        answer:
+          "Rund 2,1 km, also zehn Minuten bergab zu Fuß oder eine kurze Fahrt mit dem Tuk-Tuk. Das Hotel liegt über dem Tal in Kumbalwela, weit genug von der Hauptstraße für ruhige Nächte und nah genug, um zum Abendessen hineinzulaufen.",
+      },
+      {
+        question: "Wie weit sind die Nine Arch Bridge und Little Adams Peak?",
+        answer:
+          "Zur Nine Arch Bridge sind es etwa 25 Minuten zu Fuß durch die Teefelder, zum Little Adams Peak etwa 20 Minuten. Beides ist vor dem Frühstück gut zu schaffen, und wir sagen Ihnen, wann der Zug über die Brücke fährt.",
+      },
+      {
+        question: "Ist das Frühstück im Zimmerpreis enthalten?",
+        answer:
+          "Ja. Ein kontinentales Frühstück ist in jedem Zimmer enthalten und wird von 07:00 bis 10:00 Uhr serviert. Wenn Sie früh zum Sonnenaufgang aufbrechen, servieren wir es vorher oder packen es Ihnen ein, ohne Aufpreis.",
+      },
+      {
+        question: "Wann sind Check-in und Check-out?",
+        answer:
+          "Check-in ab 14:00 Uhr, Check-out bis 11:00 Uhr. Sagen Sie uns Ihre Ankunftszeit, und wir halten das Zimmer nach Möglichkeit früher bereit oder verlängern die Abreise.",
+      },
+      {
+        question: "Haben die Zimmer Klimaanlage und warmes Wasser?",
+        answer:
+          "Jedes Zimmer hat ein eigenes Bad mit warmer Dusche. Drei der vier Zimmertypen haben eine Klimaanlage. Das Mountain View Double hat keine, weil die Nächte auf dieser Höhe kühl genug sind, dass sie kaum jemand vermisst.",
+      },
+      {
+        question: "Gibt es Parkplätze am Hotel?",
+        answer:
+          "Ja, kostenlose Privatparkplätze auf dem Gelände. Die Straße von Kumbalwela herauf ist mit dem Pkw befahrbar, und Gäste mit Fahrer sagen uns regelmäßig, die Zufahrt sei einfacher gewesen als erwartet.",
+      },
+      {
+        question: "Organisieren Sie Transfers, Tuk-Tuks und geführte Wanderungen?",
+        answer:
+          "Ja. Wir organisieren Transfers vom Flughafen und aus Colombo, Tuk-Tuks in den Ort, Zugtickets, geführte Wanderungen auf den Ella Rock, die Zipline und die Teetour bei Halpewatte. Sagen Sie am Vorabend Bescheid, und bis zum Frühstück ist es gebucht.",
+      },
+      {
+        question: "Brauche ich eine Anzahlung oder eine Kreditkarte zum Buchen?",
+        answer:
+          "Nein. Es ist keine Vorauszahlung nötig und auch keine Karte, um das Zimmer zu halten. Sie zahlen vor Ort, und bis 18:00 Uhr am Vortag der Anreise ist die Stornierung kostenlos.",
+      },
+      {
+        question: "Sieht man den Sonnenaufgang vom Zimmer aus?",
+        answer:
+          "Ja, und deswegen kommen die meisten Gäste. Jedes Zimmer liegt zu den Bergen und öffnet sich auf einen eigenen Balkon oder eine Terrasse. An einem klaren Morgen liegen die Wolken unter Ihnen im Tal und lösen sich auf, während Sie Ihren Tee trinken.",
+      },
+      {
+        question: "Ist das Hotel für Familien geeignet?",
+        answer:
+          "Ja. Das Deluxe Family Room hat 33 m² und zwei Queensize-Betten für vier Personen, und beim Check-in gibt es keine Altersgrenze. Sagen Sie uns, wie die Betten stehen sollen, dann ist es bei Ihrer Ankunft fertig.",
+      },
+      {
+        question: "Gibt es WLAN?",
+        answer:
+          "Kostenloses WLAN auf dem gesamten Gelände, auch in den Zimmern. Der Mobilfunkempfang auf dieser Talseite reicht für Telefonate und Karten gut aus.",
+      },
+      {
+        question: "Sind Haustiere erlaubt?",
+        answer:
+          "Haustiere sind nicht erlaubt, Partys und Veranstaltungen ebenfalls nicht. Das Hotel ist klein und ruhig, und das ist Absicht.",
+      },
+    ],
+  },
+  roomsIndex: {
+    title: "Zimmer in Ella mit Bergblick",
+    description:
+      "Vier Zimmertypen im Scenic View Ella, jedes mit Bergblick, eigenem Balkon und Frühstück inklusive. Vergleichen und direkt buchen.",
+    eyebrow: "Zimmer",
+    heading: "Vier Zimmertypen. Jedes mit Blick auf die Berge.",
+    blurb:
+      "Jedes Zimmer öffnet sich auf einen eigenen Balkon oder eine Terrasse über dem Tal, mit warmer Dusche, Flachbildfernseher und kostenlosem WLAN. Das Frühstück ist überall inklusive. Wählen Sie unten ein Zimmer für Fotos, die genaue Größe und die Ausstattung.",
   },
   gallery: {
     eyebrow: "Galerie",

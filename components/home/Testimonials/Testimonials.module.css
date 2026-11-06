@@ -159,3 +159,62 @@
   box-shadow: 0 0 0 1px rgba(14, 79, 91, 0.16);
 }
 
+
+/* The aggregate, stated in plain sight.
+
+   Google shows a review snippet only when the rating it reads in the
+   markup is also on the page for a visitor to see. This is that. */
+.summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: -0.75rem 0 clamp(2rem, 1.4rem + 1.6vw, 3rem);
+}
+
+.score {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 1.5rem + 1.6vw, 2.8rem);
+  line-height: 1;
+  color: var(--gold-dk);
+}
+
+.outOf {
+  font-size: 0.95rem;
+  color: var(--smoke);
+}
+
+.count {
+  position: relative;
+  margin-left: 0.6rem;
+  padding-left: 0.95rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+
+.count::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  bottom: 0.1em;
+  width: 1px;
+  background: var(--hair);
+}
+
+@media (max-width: 480px) {
+  .summary {
+    flex-wrap: wrap;
+  }
+
+  .count {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .count::before {
+    display: none;
+  }
+}

@@ -10,14 +10,21 @@ import {
   roomBlockStyles,
 } from "@/components/room/RoomBlock/RoomBlock";
 import { RoomGallery } from "@/components/room/RoomGallery/RoomGallery";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { getDict, getRoom, getRooms } from "@/content/i18n";
-import { hotel } from "@/content/hotel";
 import { pageHeroImage } from "@/content/site";
 import { asset } from "@/lib/assets";
+import { roomImageAlt } from "@/lib/imageAlt";
 import { localeHref, type Locale } from "@/lib/i18n";
+import {
+  aggregateRating,
+  breadcrumbSchema,
+  graph,
+  roomSchema,
+} from "@/lib/seo";
 
 import styles from "@/app/rooms/[slug]/page.module.css";
 
@@ -36,16 +43,31 @@ export function RoomContent({
   if (!room) notFound();
 
   const others = getRooms(locale).filter((r) => r.slug !== slug);
+  const rating = aggregateRating();
+
+  /* The room itself plus the trail that leads to it. The breadcrumb is
+     what turns the bare URL under the search result into
+     "Home > Rooms > Deluxe Double with Balcony". */
+  const jsonLd = graph(
+    roomSchema(room, locale),
+    breadcrumbSchema([
+      { name: t.roomPage.home, path: localeHref(locale, "/") },
+      { name: t.roomPage.rooms, path: localeHref(locale, "/rooms/") },
+      { name: room.name, path: localeHref(locale, `/rooms/${slug}/`) },
+    ]),
+  );
 
   return (
     <>
+      <JsonLd data={jsonLd} />
+
       <PageHero
         title={room.name}
         subtitle={room.tagline}
         image={pageHeroImage}
         crumbs={[
           { label: t.roomPage.home, href: localeHref(locale, "/") },
-          { label: t.roomPage.rooms, href: localeHref(locale, "/#rooms") },
+          { label: t.roomPage.rooms, href: localeHref(locale, "/rooms") },
           { label: room.name },
         ]}
       />
@@ -66,7 +88,12 @@ export function RoomContent({
                   <Icon key={i} name="fa-solid fa-star" />
                 ))}
                 <span className={styles.score}>
-                  {hotel.rating} &middot; {hotel.reviewCount}{" "}
+                  {/* Five stars are drawn beside this, so the number
+                      beside them has to be on a five-point scale. It
+                      used to print the Booking.com score out of ten,
+                      which read as a 9.6 next to five stars and
+                      disagreed with the rating in the markup. */}
+                  {rating.ratingValue} &middot; {rating.reviewCount}{" "}
                   {t.roomPage.reviewsWord}
                 </span>
               </div>
@@ -108,11 +135,11 @@ export function RoomContent({
 
             <RoomBlock title={t.roomPage.morePhotos}>
               <div className={roomBlockStyles.photoGrid}>
-                {room.images.slice(1).map((image, index) => (
+                {room.images.slice(1).map((image) => (
                   <Image
                     key={image}
                     src={asset(`/img/${image}.jpg`)}
-                    alt={`${room.name}, ${index + 2}`}
+                    alt={roomImageAlt(image, room.name)}
                     width={800}
                     height={600}
                   />

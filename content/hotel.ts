@@ -1,5 +1,7 @@
 import type { Hotel } from "@/lib/types";
 
+import { testimonials } from "@/content/site";
+
 /**
  * Single source of truth for the hotel's own details.
  *
@@ -19,12 +21,18 @@ export const hotel: Hotel = {
   postcode: "90090",
 
   rating: "9.6",
-  reviewCount: "[XX]",
-  checkIn: "[14:00]",
-  checkOut: "[11:00]",
-  breakfast: "[07:00–10:00]",
+  /* Derived from the reviews published in content/site.ts, so the number
+     on the page and the number in the schema can never drift apart. */
+  reviewCount: String(testimonials.length),
+  checkIn: "14:00",
+  checkOut: "11:00",
+  breakfast: "07:00–10:00",
 
   address: "12/A Mahamewnawa Road, Kumbalwela, Ella 90090, Sri Lanka",
+  /* Supplied by the owner from the property's own map pin. Used for the
+     geo block in the Hotel schema, which is what Google reads for the
+     local pack and "hotels near me" style queries. */
+  geo: { latitude: 6.8831773, longitude: 81.0331140 },
   phone: "+94 71 630 0888",
   whatsapp: "94716300888",
   email: "scenicviewella@gmail.com",

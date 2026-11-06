@@ -49,7 +49,31 @@ export type Dict = {
     intro: string;
     places: { name: string; body: string }[];
   };
-  reviews: { eyebrow: string; heading: string; readMore: string; readLess: string };
+  reviews: {
+    eyebrow: string;
+    heading: string;
+    readMore: string;
+    readLess: string;
+    /** Noun after the count in the visible rating summary. */
+    countedWord: string;
+  };
+  /** The questions-and-answers block. The same strings are emitted as
+   *  FAQPage structured data, so a translation must stay truthful. */
+  faq: {
+    eyebrow: string;
+    heading: string;
+    blurb: string;
+    items: { question: string; answer: string }[];
+  };
+  /** The /rooms index page, which exists so "rooms" is a crawlable
+   *  destination rather than only an anchor on the home page. */
+  roomsIndex: {
+    title: string;
+    description: string;
+    eyebrow: string;
+    heading: string;
+    blurb: string;
+  };
   gallery: { eyebrow: string; heading: string };
   contact: {
     eyebrow: string;

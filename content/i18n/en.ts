@@ -4,6 +4,7 @@ import {
   aboutCopy,
   cancellationPolicy,
   facilities,
+  faqs,
   heroCopy,
   houseRules,
   navLinks,
@@ -18,7 +19,7 @@ export const en: Dict = {
   meta: {
     title: `${hotel.name} | Hotel with Mountain Views, Ella, Sri Lanka`,
     description:
-      "A four-room hotel above Ella, Sri Lanka. Private balconies over the valley, sunrise above the mist, and Little Adam's Peak and the Nine Arch Bridge on the doorstep.",
+      "A four-room hotel above Ella, Sri Lanka. Private balconies over the valley, sunrise above the mist, and the Nine Arch Bridge a short walk away.",
   },
   nav: navLinks,
   bookNow: "Book Now",
@@ -73,6 +74,23 @@ export const en: Dict = {
     heading: "What people write afterwards.",
     readMore: "Read more",
     readLess: "Read less",
+    countedWord: "guest reviews",
+  },
+  faq: {
+    eyebrow: "Before you book",
+    heading: "The questions guests ask us.",
+    blurb:
+      "If yours is not here, message us on WhatsApp. We answer faster there than anywhere else.",
+    items: faqs,
+  },
+  roomsIndex: {
+    title: "Rooms in Ella with Mountain Views",
+    description:
+      "Four room types at Scenic View Ella, every one with a mountain view, a private balcony and breakfast included. Compare them and book direct.",
+    eyebrow: "Rooms",
+    heading: "Four room types. Every one facing the mountains.",
+    blurb:
+      "Each room opens onto a private balcony or terrace above the valley, with a hot shower, a flat-screen television and free Wi-Fi. Breakfast is included with every one of them. Choose a room below for photographs, the exact size and what is in it.",
   },
   gallery: {
     eyebrow: "Gallery",

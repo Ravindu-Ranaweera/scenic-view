@@ -12,18 +12,22 @@ export function PageHero({
   title,
   subtitle,
   image,
+  imageAlt,
   crumbs,
 }: {
   title: string;
   subtitle?: string;
   image: string;
+  /** Omitted means decorative. Pass one when the photograph is of the
+   *  property or the place, which is most of the time here. */
+  imageAlt?: string;
   crumbs: Crumb[];
 }) {
   return (
     <section className={styles.hero}>
       <Image
         src={asset(`/img/${image}.jpg`)}
-        alt=""
+        alt={imageAlt ?? ""}
         fill
         priority
         sizes="100vw"

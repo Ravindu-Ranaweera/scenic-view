@@ -3,6 +3,12 @@ import type { Post } from "@/lib/types";
 /**
  * The journal.
  *
+ * Each piece carries a `published` date. Article structured data
+ * without one is treated as undated, which keeps it out of most rich
+ * results and tells Google nothing about freshness. The dates below are
+ * the publication schedule for the imported set; set a real one when
+ * you write a new piece, and set `updated` when you revise an old one.
+ *
  * Imported from Scenic_View_Ella_10_SEO_Articles.docx, which supplied the
  * SEO title, keywords and meta description for each piece. Body copy is
  * stored as structured blocks rather than HTML so nothing unescaped from
@@ -16,7 +22,7 @@ export const posts: Post[] = [
   {
     slug: "where-to-stay-in-ella",
     title: "Where to Stay in Ella, Sri Lanka: A Guide for Travellers",
-    seoTitle: "Where to Stay in Ella, Sri Lanka | Scenic View",
+    seoTitle: "Where to Stay in Ella, Sri Lanka",
     excerpt: "Looking for where to stay in Ella, Sri Lanka? Explore accommodation options, mountain scenery, local attractions and tips for planning your stay.",
     primaryKeyword: "where to stay in Ella Sri Lanka",
     secondaryKeywords: [
@@ -27,6 +33,7 @@ export const posts: Post[] = [
     ],
     image: "view-06",
     readingMinutes: 2,
+    published: "2026-02-09",
     blocks: [
       { type: "p", text: "Ella is one of those places that makes you want to slow down and enjoy your surroundings. With green mountains, tea plantations, scenic railway journeys and beautiful walking trails, this small town in Sri Lanka's hill country attracts travellers looking for both adventure and relaxation." },
       { type: "p", text: "If you are planning a visit, choosing the right accommodation in Ella, Sri Lanka, can make your trip much more enjoyable. The best place to stay depends on the kind of holiday you have in mind." },
@@ -63,7 +70,7 @@ export const posts: Post[] = [
   {
     slug: "nine-arch-bridge-ella-guide",
     title: "Nine Arch Bridge Ella: A Guide to One of Sri Lanka's Most Beautiful Railway Landmarks",
-    seoTitle: "Nine Arch Bridge Ella: Visitor Guide and Travel Tips",
+    seoTitle: "Nine Arch Bridge Ella: A Visitor's Guide",
     excerpt: "Planning to visit Nine Arch Bridge in Ella, Sri Lanka? Learn what to expect, how to plan your visit and what else to explore nearby.",
     primaryKeyword: "Nine Arch Bridge Ella",
     secondaryKeywords: [
@@ -73,6 +80,7 @@ export const posts: Post[] = [
     ],
     image: "blog/nine-arch-bridge",
     readingMinutes: 2,
+    published: "2026-03-02",
     blocks: [
       { type: "p", text: "If you have seen photographs of Ella, you have probably come across the famous Nine Arch Bridge. Surrounded by lush greenery and tea-growing hills, this historic railway bridge is one of the most recognisable places in Sri Lanka's hill country." },
       { type: "p", text: "For many travellers, visiting Nine Arch Bridge is an essential part of an Ella trip. Whether you enjoy photography, nature or exploring interesting places, it is worth adding to your travel plans." },
@@ -106,7 +114,7 @@ export const posts: Post[] = [
   {
     slug: "little-adams-peak-hiking-guide",
     title: "Little Adam's Peak Ella: A Hiking Guide for First-Time Visitors",
-    seoTitle: "Little Adam's Peak Ella: Hiking Guide for Visitors",
+    seoTitle: "Little Adam's Peak, Ella: Hiking Guide",
     excerpt: "Planning the Little Adam's Peak hike in Ella? Learn how to prepare, what to bring and how to plan a rewarding hill-country adventure.",
     primaryKeyword: "Little Adam's Peak Ella",
     secondaryKeywords: [
@@ -116,6 +124,7 @@ export const posts: Post[] = [
     ],
     image: "blog/little-adams-peak",
     readingMinutes: 2,
+    published: "2026-03-23",
     blocks: [
       { type: "p", text: "Ella is a favourite destination for travellers who enjoy nature and outdoor activities. Among its popular attractions, Little Adam's Peak stands out for its green mountain scenery and rewarding views." },
       { type: "p", text: "If you are planning to explore Ella, adding the Little Adam's Peak hike to your itinerary is a great way to spend time outdoors." },
@@ -145,7 +154,7 @@ export const posts: Post[] = [
   {
     slug: "ella-rock-hike-guide",
     title: "Ella Rock Hike: What to Know Before You Go",
-    seoTitle: "Ella Rock Hike: Route Planning and Essential Tips",
+    seoTitle: "Ella Rock Hike: Route and Essential Tips",
     excerpt: "Get ready for the Ella Rock hike with practical advice on preparation, navigation, footwear, weather and planning your day in Ella.",
     primaryKeyword: "Ella Rock hike",
     secondaryKeywords: [
@@ -155,6 +164,7 @@ export const posts: Post[] = [
     ],
     image: "blog/ella-rock",
     readingMinutes: 2,
+    published: "2026-04-13",
     blocks: [
       { type: "p", text: "For travellers who enjoy hiking, Ella offers more than beautiful views from the roadside. Ella Rock is one of the area's well-known outdoor attractions, attracting visitors who want to spend more time exploring the hill country on foot." },
       { type: "p", text: "If you are considering the Ella Rock hike, it is worth preparing in advance. A little planning can help you enjoy the walk while making sensible decisions about safety." },
@@ -191,7 +201,7 @@ export const posts: Post[] = [
   {
     slug: "how-to-get-to-ella-by-train",
     title: "Train to Ella, Sri Lanka: A Guide for Travellers",
-    seoTitle: "Train to Ella, Sri Lanka: Routes and Travel Tips",
+    seoTitle: "Train to Ella, Sri Lanka: Routes and Tips",
     excerpt: "Planning a train journey to Ella, Sri Lanka? Explore route-planning tips, ticket advice and ways to organise your arrival and accommodation.",
     primaryKeyword: "train to Ella Sri Lanka",
     secondaryKeywords: [
@@ -202,6 +212,7 @@ export const posts: Post[] = [
     ],
     image: "blog/hill-country-train",
     readingMinutes: 2,
+    published: "2026-05-04",
     blocks: [
       { type: "p", text: "A train journey through Sri Lanka's hill country can be one of the most memorable parts of a holiday. Green landscapes, tea plantations and mountain scenery make the railway journey to Ella especially appealing to visitors." },
       { type: "p", text: "If you are planning to travel by train, a little preparation can help you enjoy the journey without unnecessary stress." },
@@ -238,6 +249,7 @@ export const posts: Post[] = [
     ],
     image: "view-01",
     readingMinutes: 2,
+    published: "2026-05-25",
     blocks: [
       { type: "p", text: "Ella is a wonderful destination for travellers who enjoy mountain scenery, outdoor activities and a slower pace of life. Although it is a relatively small town, there are plenty of places to explore during a visit." },
       { type: "p", text: "If you are planning a trip, these attractions are a good starting point for discovering what Ella has to offer." },
@@ -267,7 +279,7 @@ export const posts: Post[] = [
   {
     slug: "ella-tea-plantations-guide",
     title: "Tea Plantations in Ella: Discover Sri Lanka's Hill-Country Scenery",
-    seoTitle: "Tea Plantations in Ella: A Hill-Country Travel Guide",
+    seoTitle: "Tea Plantations in Ella: A Travel Guide",
     excerpt: "Explore the tea-growing landscapes around Ella, learn about Sri Lanka's tea culture and plan a scenic hill-country visit.",
     primaryKeyword: "tea plantations in Ella",
     secondaryKeywords: [
@@ -277,6 +289,7 @@ export const posts: Post[] = [
     ],
     image: "blog/tea-plantation",
     readingMinutes: 2,
+    published: "2026-06-15",
     blocks: [
       { type: "p", text: "The hill country around Ella is known for its green slopes, winding roads and tea-growing landscapes. For travellers who want to experience a different side of Sri Lanka, exploring the region's tea culture can be a rewarding addition to a holiday." },
       { type: "p", text: "The scenery is beautiful in its own way. Rows of tea plants follow the shape of the hills, while changing weather can bring mist and soft light across the landscape." },
@@ -300,8 +313,8 @@ export const posts: Post[] = [
   },
   {
     slug: "how-to-choose-a-hotel-in-ella",
-    title: "How to Choose the Right Hotel in Ella, Sri Lanka",
-    seoTitle: "How to Choose the Right Hotel in Ella, Sri Lanka",
+    title: "How to Choose a Hotel in Ella, Sri Lanka",
+    seoTitle: "How to Choose a Hotel in Ella, Sri Lanka",
     excerpt: "Looking for hotels in Ella, Sri Lanka? Compare location, room facilities, mountain views, breakfast, parking and transport before booking.",
     primaryKeyword: "hotels in Ella Sri Lanka",
     secondaryKeywords: [
@@ -312,6 +325,7 @@ export const posts: Post[] = [
     ],
     image: "deluxe-03",
     readingMinutes: 2,
+    published: "2026-07-06",
     blocks: [
       { type: "p", text: "Finding the right hotel can make a big difference to your holiday. Ella has different types of accommodation, from properties close to the town centre to quieter places surrounded by greenery." },
       { type: "p", text: "If you are comparing hotels in Ella, Sri Lanka, it helps to know which features matter most for your trip." },
@@ -342,7 +356,7 @@ export const posts: Post[] = [
   {
     slug: "ella-2-day-itinerary",
     title: "Two Days in Ella, Sri Lanka: A Practical Itinerary",
-    seoTitle: "2 Days in Ella, Sri Lanka: A Practical Travel Itinerary",
+    seoTitle: "2 Days in Ella, Sri Lanka: An Itinerary",
     excerpt: "Planning two days in Ella, Sri Lanka? Use this practical itinerary to organise sightseeing, hiking, local food and a relaxing stay.",
     primaryKeyword: "2 days in Ella Sri Lanka",
     secondaryKeywords: [
@@ -353,6 +367,7 @@ export const posts: Post[] = [
     ],
     image: "view-05",
     readingMinutes: 2,
+    published: "2026-07-27",
     blocks: [
       { type: "p", text: "Two days in Ella can give you a taste of the hill country's scenery, popular attractions and relaxed atmosphere. With a little planning, you can enjoy some of the area's best-known places without trying to fit too much into a short visit." },
       { type: "p", text: "This itinerary is a starting point. Adjust it according to the weather, your arrival time and the activities you enjoy." },
@@ -393,7 +408,7 @@ export const posts: Post[] = [
   {
     slug: "mountain-view-accommodation-ella",
     title: "A Peaceful Mountain-View Stay in Ella, Sri Lanka",
-    seoTitle: "Mountain View Accommodation in Ella | Scenic View",
+    seoTitle: "Mountain View Accommodation in Ella",
     excerpt: "Discover Scenic View - Ella, with mountain-view rooms, private bathrooms, air conditioning, free Wi-Fi, a restaurant and a garden.",
     primaryKeyword: "mountain view accommodation Ella",
     secondaryKeywords: [
@@ -404,6 +419,7 @@ export const posts: Post[] = [
     ],
     image: "view-04",
     readingMinutes: 2,
+    published: "2026-08-17",
     blocks: [
       { type: "p", text: "A trip to Ella is often about more than visiting famous attractions. It is also about enjoying the green hills, taking a break from busy routines and waking up somewhere that feels different from everyday life." },
       { type: "p", text: "For travellers searching for mountain-view accommodation in Ella, the right room can be an important part of that experience." },

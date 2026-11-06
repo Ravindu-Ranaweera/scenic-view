@@ -7,9 +7,11 @@ import { PageHero } from "@/components/room/PageHero/PageHero";
 import { ButtonLink } from "@/components/ui/Button/Button";
 import { Container } from "@/components/ui/Container/Container";
 import { Icon } from "@/components/ui/Icon/Icon";
-import { hotel, siteUrl, telHref } from "@/content/hotel";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { hotel, telHref } from "@/content/hotel";
 import { getPost, otherPosts, posts } from "@/content/posts";
 import { rooms } from "@/content/rooms";
+import { abs, articleSchema, breadcrumbSchema, graph } from "@/lib/seo";
 
 import styles from "./page.module.css";
 
@@ -33,12 +35,21 @@ export async function generateMetadata({
     title: post.seoTitle,
     description: post.excerpt,
     keywords: [post.primaryKeyword, ...post.secondaryKeywords],
-    alternates: { canonical: `${siteUrl}/journal/${post.slug}/` },
+    alternates: { canonical: abs(`/journal/${post.slug}/`) },
     openGraph: {
       type: "article",
       title: post.seoTitle,
       description: post.excerpt,
-      url: `${siteUrl}/journal/${post.slug}/`,
+      url: abs(`/journal/${post.slug}/`),
+      publishedTime: post.published,
+      modifiedTime: post.updated ?? post.published,
+      authors: [hotel.name],
+      images: [`/img/${post.image}.jpg`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.seoTitle,
+      description: post.excerpt,
       images: [`/img/${post.image}.jpg`],
     },
   };
@@ -54,37 +65,34 @@ export default async function PostPage({
 
   if (!post) notFound();
 
-  /* Article structured data, so the piece can be eligible for rich results. */
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
-    image: `${siteUrl}/img/${post.image}.jpg`,
-    author: { "@type": "Organization", name: hotel.name },
-    publisher: {
-      "@type": "Organization",
-      name: hotel.name,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: hotel.street,
-        addressLocality: hotel.town,
-        postalCode: hotel.postcode,
-        addressCountry: "LK",
-      },
-      telephone: hotel.phone,
-      email: hotel.email,
-    },
-    mainEntityOfPage: `${siteUrl}/journal/${post.slug}/`,
-  };
+  /* Shown in the breadcrumb strip. Structured data that claims a
+     publication date the reader cannot see is exactly the kind of
+     mismatch that costs a rich result, so the date goes on the page. */
+  const publishedLabel = new Date(
+    post.updated ?? post.published,
+  ).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  /* The article, the trail to it, and a reference back to the hotel
+     that publishes it. Linking the three means a crawler reading a
+     guide to the Nine Arch Bridge also learns which business wrote it
+     and where that business is, which is how a small hotel earns
+     topical authority for its own area. */
+  const jsonLd = graph(
+    articleSchema(post),
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Journal", path: "/journal/" },
+      { name: post.title, path: `/journal/${post.slug}/` },
+    ]),
+  );
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        // Serialised from our own typed content, not user input.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       <PageHero
         title={post.title}
@@ -93,6 +101,7 @@ export default async function PostPage({
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Journal", href: "/journal" },
+          { label: publishedLabel },
           { label: `${post.readingMinutes} min read` },
         ]}
       />

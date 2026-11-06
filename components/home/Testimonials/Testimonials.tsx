@@ -9,12 +9,20 @@ import { getDict } from "@/content/i18n";
 import { testimonials } from "@/content/site";
 import { asset } from "@/lib/assets";
 import type { Locale } from "@/lib/i18n";
+import { aggregateRating } from "@/lib/seo";
 
 import { ReviewQuote } from "./ReviewQuote";
 import styles from "./Testimonials.module.css";
 
 export function Testimonials({ locale = "en" }: { locale?: Locale }) {
   const t = getDict(locale);
+
+  /* The same figures the home page emits as aggregateRating.
+     Google will only show a review snippet when the aggregate is
+     visible to the visitor on the page that declares it, so this
+     summary is a requirement rather than decoration. Both come from
+     one function, so they cannot disagree. */
+  const summary = aggregateRating();
 
   return (
     <Section id="reviews">
@@ -23,6 +31,14 @@ export function Testimonials({ locale = "en" }: { locale?: Locale }) {
         title={t.reviews.heading}
         centered
       />
+
+      <p className={styles.summary}>
+        <span className={styles.score}>{summary.ratingValue}</span>
+        <span className={styles.outOf}>/ {summary.bestRating}</span>
+        <span className={styles.count}>
+          {summary.reviewCount} {t.reviews.countedWord}
+        </span>
+      </p>
 
       <div className={styles.wrap}>
         <span className={styles.glyph} aria-hidden="true">

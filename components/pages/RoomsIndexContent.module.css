@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 0.9rem + 2.4vw, 3rem);
+}
+
+.note {
+  max-width: 48rem;
+  margin: 0 auto clamp(3.5rem, 2.5rem + 3.5vw, 6rem);
+  text-align: center;
+  color: var(--smoke);
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

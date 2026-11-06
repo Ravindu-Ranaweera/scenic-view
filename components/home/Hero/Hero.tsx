@@ -7,6 +7,7 @@ import { Icon } from "@/components/ui/Icon/Icon";
 import { Container } from "@/components/ui/Container/Container";
 import { Reveal } from "@/components/ui/Reveal/Reveal";
 import { SplitHeading } from "@/components/ui/SplitHeading/SplitHeading";
+import { hotel } from "@/content/hotel";
 import { getDict } from "@/content/i18n";
 import { heroImage } from "@/content/site";
 import { asset } from "@/lib/assets";
@@ -30,7 +31,7 @@ export function Hero({ locale = "en" }: { locale?: Locale }) {
       <div className={styles.frame}>
         <Image
           src={asset(`/img/${heroImage}.jpg`)}
-          alt=""
+          alt={`${hotel.name}, a hillside hotel above the valley in Ella, Sri Lanka, at sunrise`}
           fill
           priority
           sizes="100vw"
@@ -61,7 +62,7 @@ export function Hero({ locale = "en" }: { locale?: Locale }) {
               <div className={styles.actions}>
                 <CheckAvailability locale={locale} />
                 <ButtonLink
-                  href={localeHref(locale, "/#rooms")}
+                  href={localeHref(locale, "/rooms")}
                   variant="outlineLight"
                 >
                   {t.hero.viewRooms}

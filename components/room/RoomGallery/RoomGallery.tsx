@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import styles from "./RoomGallery.module.css";
 import { asset } from "@/lib/assets";
+import { roomImageAlt } from "@/lib/imageAlt";
 
 export function RoomGallery({
   images,
@@ -20,7 +21,7 @@ export function RoomGallery({
       <div className={styles.lead}>
         <Image
           src={asset(`/img/${images[active]}.jpg`)}
-          alt={`${roomName}, photo ${active + 1}`}
+          alt={roomImageAlt(images[active], roomName)}
           width={1200}
           height={750}
           priority

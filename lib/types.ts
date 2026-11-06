@@ -9,13 +9,17 @@ export type Hotel = {
   street: string;
   town: string;
   postcode: string;
-  /** Values still to be confirmed by the owner are wrapped in [brackets]. */
+  /** The Booking.com guest score, on their ten-point scale. */
   rating: string;
+  /** Count of the reviews published on this site, as a string for display. */
   reviewCount: string;
   checkIn: string;
   checkOut: string;
   breakfast: string;
   address: string;
+  /** Decimal degrees, from the property's own map pin. Feeds the geo
+   *  block in the Hotel schema and the Google Maps embed. */
+  geo: { latitude: number; longitude: number };
   phone: string;
   /** International format, digits only — used to build wa.me links. */
   whatsapp: string;
@@ -120,5 +124,18 @@ export type Post = {
   /** Image id under /img. */
   image: string;
   readingMinutes: number;
+  /** ISO date the piece was published. Article structured data without a
+   *  date is treated as undated and rarely wins a rich result. */
+  published: string;
+  /** ISO date of the last substantive edit. Defaults to `published`. */
+  updated?: string;
   blocks: PostBlock[];
+};
+
+/** One question and answer, rendered on the page and emitted as FAQPage
+ *  structured data. Google will only show an FAQ rich result when the
+ *  same text is visible to the visitor, so these must stay paired. */
+export type Faq = {
+  question: string;
+  answer: string;
 };

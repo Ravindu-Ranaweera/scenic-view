@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
-import { altLocales } from "@/lib/i18n";
+import { HtmlLang } from "@/components/layout/HtmlLang/HtmlLang";
+import { altLocales, isLocale } from "@/lib/i18n";
 
 /** The static export generates exactly /ru and /de. English stays at
  *  the bare routes, so it is deliberately absent here. */
@@ -16,5 +17,13 @@ export default async function LocaleLayout({
 }: LayoutProps<"/[locale]">) {
   const { locale } = await params;
   if (!(altLocales as readonly string[]).includes(locale)) notFound();
-  return children;
+
+  return (
+    <>
+      {/* The single root layout hard-codes lang="en"; this corrects it
+          for assistive technology on the translated pages. */}
+      {isLocale(locale) && <HtmlLang locale={locale} />}
+      {children}
+    </>
+  );
 }
